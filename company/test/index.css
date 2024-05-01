@@ -1,0 +1,100 @@
+:root {
+    --bgColor:#000;
+    --liBorderColor:#a52a2a80;
+    --pagingNormCol:#a52a2a;
+    --bgCommColor:#f59696;
+}
+#wrap,
+#header,
+#container,
+#content,
+#footer {
+    width: 100%;
+}
+#wrap {
+    min-width: 1200px;
+    font-family: 'noto sans KR' sans-serif;
+}
+.inner {
+    box-sizing: border-box;
+    position: relative;
+    margin: auto;
+    min-width: 1200px;
+    max-width: 1920px;
+}
+#header,
+#footer {
+    background-color: var(--bgCommColor);
+}
+.index .sec1 .inner {
+    height: 800px;
+    padding: 50px;
+}
+.sec1 p {
+    height: 2000px;
+    border: 1px solid #000;
+}
+.sec1 .inner > div {
+    border-radius: 15px;
+    width: 800px;height: 400px;
+    background-color: var(--bgColor);
+    text-align: center;
+    visibility: hidden;
+}
+.sec1 > div span {
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 400px;
+}
+.sec1 ul {
+    margin-top: 50px;
+    width: 90%; height: 500px;
+    background-color: var(--bgColor);
+    overflow: hidden;
+    overflow-y: auto;
+    margin-bottom: 1000px;
+    position: relative;
+}
+.sec1 ul li {
+    border: 2px solid var(--bgCommColor);
+    background-color: brown;
+    border-radius: 15px;
+    width: 500px;height: 80px;
+    margin-left: auto;
+    position: absolute;right: 23px;top: 50%;
+    transition-duration: 0.4s;
+    transition-property: top,transform,opacity;
+}
+.sec1 ul li div {
+    width: 500px;height: 80px;
+    box-sizing: border-box;
+    padding: 30px;
+    overflow: hidden;text-overflow: ellipsis;white-space: nowrap;
+}
+.sec1 ul li::after,
+.sec1 ul li::before {
+    content: "";
+    width: 0;height: 0;
+    position: absolute;left: 100%;top: 50%;
+    border: 2px solid transparent;
+    pointer-events:none;
+}
+.sec1 ul li::after {
+    border-width: 20px;
+    margin-top: -20px;
+    border-left-color: brown;
+}
+.sec1 ul li.on::after {
+    border-left-color: grey;
+}
+.sec1 ul li.on::before {border-left-color: var(--pagingNormCol);}
+.sec1 ul li::before {
+    border-width: 23px;
+    margin-top: -23px;
+    border-left-color: var(--bgCommColor);
+}
+.sec1 ul li.on {
+    border: 2px solid var(--pagingNormCol);
+    background-color: grey;
+    transform: scale(1.2) translateX(-20%);
+}

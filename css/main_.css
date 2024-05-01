@@ -1,0 +1,113 @@
+.main button {
+    width: 150px;
+    height: 30px;
+    margin-bottom: 50px;
+}
+.main .mainNewsList.on {
+    display: block;
+}
+.main .mainBlogList.on {
+    display: block;
+}
+.main .cardScrollNews {
+    display: none;
+    width: 1400px;
+    height: 500px;
+}
+.main .cardScrollNews ul {
+    width: 1400px;
+    height: 400px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    overflow: hidden;
+}
+.main .cardScrollNews ul li {
+    box-sizing: border-box;
+    border: 1px solid var(--primary-color);
+    width: 400px;
+    height: 300px;
+}
+.main .cardScrollNews ul li:not(:first-child) {
+    margin-left: 100px;
+}
+.main .cardScrollNews ul li a div {
+    width: 400px;
+    height: 250px;
+    background-image: url(../images/content/test.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
+.main .cardScrollNews ul li a p {
+    margin-top: 12px;
+    font-size: 20px;
+    width: 400px;
+    height: 50px;
+    box-sizing: border-box;
+    padding: 0 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.main .scrollbar {
+    height: 5px;
+    width: 100px;
+    background-color: var(--primary-color);
+    margin-bottom: 150px;
+    transition: transform 0.3s;
+    --maxGage: 1400;
+}
+.main .rollbanner {
+    width: 1400px;
+    height: 500px;
+    border: 1px solid #000;
+    margin-bottom: 200px;
+}
+.main .rollbanner ul {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    perspective: 500px;
+}
+.main .rollbanner ul li {
+    border: 2px solid var(--primary-color);
+    box-sizing: border-box;
+    width: 400px;
+    height: 300px;
+    transform-style: preserve-3d;
+    transform-origin: center center 50px;
+    transition: transform 0.5s;
+    /* animation: ani3DTest 2s ease-out 0s infinite alternate none; */
+}
+.main .rollbanner ul li a img {
+    width: 400px;
+    height: 300px;
+    object-fit: cover;
+    object-position: center center;
+}
+.main .rollbanner ul li:hover {
+    transform: scale(1.1) translateZ(100px);
+    z-index: 1;
+    /* transform: scale(1.1); */
+}
+.main .rollbanner ul li:nth-child(1) {
+}
+.main .rollbanner ul li:nth-child(2) {
+}
+.main .rollbanner ul li:nth-child(3) {
+}
+.main .rollbanner ul li:nth-child(4) {
+}
+.main .rollbanner ul li:nth-child(5) {
+}
+@keyframes ani3DTest {
+    50% {
+        transform: rotate3d(-67, 0, -50, 180deg);
+    }
+    100% {
+        transform: rotate3d(0, 0, 50, 360deg);
+    }
+}
