@@ -257,6 +257,10 @@ const divScrollNavi = document.querySelector('.main .main-area6 .rolling-bar spa
 const arrBlogList = [...arrNewsList].sort((a, b) => (a.index > b.index ? -1 : 0));
 const nDefaultGage = parseInt(getComputedStyle(divScrollNavi).width);
 const nMaxGage = Number(getComputedStyle(divScrollNavi).getPropertyValue('--maxGage')) - nDefaultGage;
+const contains = document.querySelector('.main .sct1');
+// contains.style.setProperty('--moveHeigh', '670px');
+// contains.style.setProperty('--moveWidth', '-1850px');
+console.log(getComputedStyle(contains).getPropertyValue('--moveWidth'), getComputedStyle(contains).getPropertyValue('--moveHeigh'), 1);
 let nCaptureY = 0,
     bCaptureY = false,
     bScrollEnd = false,
@@ -349,6 +353,7 @@ const ul1 = document.querySelector('.main .sct1 .contain .large ul');
 function ulFixedPosition(e) {
     let ty = ul1.getBoundingClientRect().top;
     // ul1.style.transform = `translateY(${ty}px)`;
-    console.log(ul1.getBoundingClientRect().top, e.pageY, e.deltaY, e.clientY);
+    // console.log(ul1.getBoundingClientRect().top, e.pageY, e.deltaY, e.clientY);
 }
 divL.addEventListener('wheel', ulFixedPosition);
+const ty = window.addEventListener('scroll', () => {});

@@ -709,6 +709,8 @@
 }
 /* ------------ test용 추가 삭제예정 --------------- */
 .main .sct1 {
+    --moveWidth: -1850px;
+    --moveHeight: 670px;
     width: 100%;
     background-color: antiquewhite;
     position: relative;
@@ -720,7 +722,7 @@
 }
 .main .sct1 .contain {
     margin: auto;
-    /* border: 1px solid #000; */
+    border: 1px solid #000;
     width: 1400px;
     height: 600px;
     margin-bottom: 200px;
@@ -746,11 +748,18 @@
 .main .sct1 .contain .large {
     height: 1200px;
 }
+@keyframes ani-position {
+    to {
+        transform: translate(var(--moveWidth), var(--moveHeight));
+    }
+}
 .main .sct1 .contain .large ul {
     margin-top: 76px;
     display: flex;
     gap: 30px;
     position: relative;
+    animation: ani-position linear forwards;
+    animation-timeline: --processbaring;
 }
 .main .sct1 .contain .large ul li p {
     margin-bottom: 30px;
