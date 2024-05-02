@@ -221,6 +221,7 @@ let nCurA3 = 0;
 const fRollArea3Bann = (num = 0) => {
     const cnt = arrImgArea3.length;
     const arrCls = ['before', 'on', 'after'];
+    // let ani = [{ transform: ['scale(1)', 'scale(1.2)'] }, { duration: 400, fill: 'forward' }];
     const center = 1;
     num = (num < 0 ? cnt - 1 : num) % cnt;
     nCurA3 = num;
@@ -230,9 +231,9 @@ const fRollArea3Bann = (num = 0) => {
         let tmp = i - center + nCurA3;
         tmp = (tmp < 0 ? cnt + tmp : tmp) % cnt;
         // if (i === center) {
-        //     arrImgArea3[tmp].style.transition = 'none';
-        //     arrImgArea3[tmp].animate(...ani);
-        // } else arrImgArea3[tmp].style.transition = 'all 0.4s';
+        //     // arrImgArea3[tmp].style.transition = 'none';
+        //     // arrImgArea3[tmp].animate(...ani);
+        // } //else arrImgArea3[tmp].style.transition = 'all 0.4s';
         arrImgArea3[tmp].classList.remove(arrImgArea3[tmp].className);
         arrImgArea3[tmp].classList.add(arrCls[i]);
     }
@@ -258,11 +259,24 @@ cRollArea4.init();
 const btnContentCard = document.querySelectorAll('.main .main-area6 article .tab a');
 const newslist = document.querySelector('.news-list');
 const bloglist = document.querySelector('.blog-list');
+const allConList = document.querySelectorAll('.main .main-area6 article .rolling');
 const ulCardList = document.querySelectorAll('.main .main-area6 article .rolling .thums');
+const spanGageBar = document.querySelectorAll('.main .main-area6 article .rolling .contain .processer span');
 const [arrNewsList, arrBlogList] = [strNewsDataURL, blogPost.filter((item) => item.id <= 5)];
 let bViewNews = true,
-    liCardList = [[], []],
-    nMoveWdth = [];
+    nLiWidth = 1100;
+btnContentCard.forEach((item, idx) => {
+    item.addEventListener('click', (e) => {
+        allConList.forEach(($item) => $item.classList.remove('on'));
+        btnContentCard.forEach(($item) => $item.classList.remove('on'));
+        item.classList.add('on');
+        bViewNews = idx === 0 ? true : false;
+        allConList[idx].animate(...objDefaultAnit);
+        allConList[idx].classList.add('on');
+        // fSetScrollAni(allConList[idx],bViewNews,ulCardList[idx],0);
+        // fSetScrollAni(allConList[idx],bViewNews,spanGageBar[idx],1);
+    });
+});
 function fContListInit(list, arr) {
     const ul = list.querySelector('ul');
     const cate = list.className.indexOf('news') >= 0 ? true : false;
@@ -287,24 +301,26 @@ function fContListInit(list, arr) {
         li.append(p, span);
         ul.append(li);
     }
+    fSetScrollAni(list, cate, ul, 0);
+    fSetScrollAni(list, cate, spanGageBar[cate === true ? 0 : 1], 1);
+}
+function fSetScrollAni(ele, b, target, n) {
+    const num = fGetWidhHeigh(ulCardList[b === true ? 0 : 1]);
+    nLiWidth = Number.isNaN(num) ? nLiWidth : num;
+    const objScrollWidth = { transform: ['', `translate(${-nLiWidth}px, 730px)`] };
+    const objScrollGege = { transform: ['', 'scaleX(1)'] };
+    const sTL = new ScrollTimeline({ source: ele });
+    target.animate(n === 0 ? objScrollWidth : objScrollGege, { fill: 'forwards', timeline: sTL });
+}
+function fGetWidhHeigh(list) {
+    const li = [...list.children];
+    const nMoveWdth =
+        li.reduce((acc, crr) => {
+            return acc + parseInt(getComputedStyle(crr).marginLeft) + parseInt(getComputedStyle(crr).marginRight) + parseInt(getComputedStyle(crr).width) + parseInt(getComputedStyle(list).getPropertyValue('gap'));
+        }, 0) -
+        parseInt(getComputedStyle(list).width) -
+        parseInt(getComputedStyle(list).getPropertyValue('gap'));
+    return nMoveWdth;
 }
 fContListInit(newslist, arrNewsList);
 fContListInit(bloglist, arrBlogList);
-ulCardList.forEach((item, idx) => liCardList[idx].push(...item.children));
-liCardList.forEach((item, idx) => {
-    nMoveWdth[idx] =
-        item.reduce((acc, crr) => {
-            return acc + parseInt(getComputedStyle(crr).marginLeft) + parseInt(getComputedStyle(crr).marginRight) + parseInt(getComputedStyle(crr).width);
-        }, 0) - parseInt(getComputedStyle(ulCardList[idx]).width);
-});
-btnContentCard.forEach((item, idx) => {
-    item.addEventListener('click', (e) => {
-        const list = document.querySelectorAll('.main .main-area6 article .rolling');
-        list.forEach(($item) => $item.classList.remove('on'));
-        btnContentCard.forEach(($item) => $item.classList.remove('on'));
-        item.classList.add('on');
-        bViewNews = idx === 0 ? true : false;
-        list[idx].animate(...objDefaultAnit);
-        list[idx].classList.add('on');
-    });
-});
