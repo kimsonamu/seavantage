@@ -1,0 +1,113 @@
+.sub8 {
+    --bgColor: #000;
+    --liBorderColor: #a52a2a80;
+    --pagingNormCol: #a52a2a;
+}
+.sub8 .sec1 article {
+    height: 1000px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.sub8 .sec1 article .btns {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 0 20px;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.sub8 .sec1 article .btns button {
+    border-radius: 25px;
+    width: 50px;
+    height: 50px;
+    border: none;
+}
+.sub8 .sec1 article .btns button i {
+    font-size: 30px;
+}
+.sub8 .sec1 article ul:first-of-type {
+    z-index: 10;
+    width: 600px;
+    height: 500px;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+}
+.sub8 .sec1 article ul:first-of-type li {
+    box-sizing: border-box;
+    border: 2px solid var(--liBorderColor);
+    height: 400px;
+    width: 200px;
+    position: absolute;
+    left: 600px;
+    top: 50%;
+    border-radius: 15px;
+    background-color: var(--bgColor);
+    overflow: hidden;
+    transition-duration: 0.4s;
+    transition-property: left, transform, z-index;
+    transform: translateY(-50%);
+    filter: brightness(70%);
+    z-index: 10;
+}
+.sub8 .sec1 article ul:first-of-type li.on {
+    filter: brightness(100%);
+    z-index: 20;
+    transform: translate(0, -50%) scale(1.2);
+}
+.sub8 .sec1 article ul:first-of-type li.on:hover {
+    border-color: var(--pagingNormCol);
+}
+.sub8 .sec1 article ul:first-of-type li a img {
+    width: 200px;
+    height: 300px;
+    transition: transform 0.4s;
+}
+.sub8 .sec1 article ul:first-of-type li.on a img:hover {
+    transform: scale(1.1);
+}
+.sub8 .sec1 article ul:first-of-type li a p {
+    margin-top: 15px;
+    font-weight: 500;
+    font-size: 20px;
+    text-align: center;
+    width: 200px;
+    overflow: hidden;
+    word-spacing: nowrap;
+    text-overflow: ellipsis;
+}
+.sub8 .sec1 article ul:first-of-type li a span {
+    border-radius: 15px;
+    background-color: var(--liBorderColor);
+    text-align: center;
+    display: block;
+    margin: auto;
+    width: 150px;
+    height: 30px;
+    line-height: 30px;
+    margin-top: 5px;
+}
+.sub8 .sec1 article ul:last-of-type {
+    width: 300px;
+    margin-top: 30px;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+}
+.sub8 .sec1 article ul:last-of-type li {
+    width: 5px;
+    height: 5px;
+    border: 2px solid var(--pagingNormCol);
+    border-radius: 10px;
+    cursor: pointer;
+}
+.sub8 .sec1 article ul:last-of-type li.on {
+    background-color: var(--pagingNormCol);
+    width: 10px;
+    height: 10px;
+}

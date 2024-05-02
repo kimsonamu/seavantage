@@ -1,4 +1,4 @@
-import { strNewsDataURL, blogPost } from './data.js';
+import arrNewsList from './news.con.js';
 
 const box = document.querySelector('.logos-width');
 const banner = document.querySelector('.logos-width .logo');
@@ -12,33 +12,11 @@ clone.style.left = bannerUl;
 banner.classList.add('original');
 clone.classList.add('clone');
 
-const stickyHeader = () => {
-    const $header = get('#header');
-    const $headerType = get('#header .type');
-    const $visual = get('#visual');
-    let topY = 0,
-        visH = 0;
-    window.addEventListener('scroll', (e) => {
-        topY = window.scrollY;
-        visH = $visual.getBoundingClientRect().height;
-        if (topY > visH) {
-            $header.style.position = 'fixed';
-            $header.style.top = '0';
-        } else if (topY < visH) {
-            $header.style.display = `none`;
-            $header.style.display = `block`;
-            $header.style.position = `absolute`;
-        }
-    });
-};
-stickyHeader();
-
 // area5 between 6 banner link
 const btnGoCustom = document.querySelector('.main .band-banner');
 btnGoCustom.addEventListener('click', (e) => {
-    location.href = 'price.html';
+    location.href = 'news.html';
 });
-const objDefaultAnit = [{ opacity: [0, 1] }, { duration: 300, fill: 'forwards' }];
 
 // for RollBanner class
 class CMakeRollBanner {
@@ -121,12 +99,12 @@ class CRollForA4 extends CMakeRollBanner {
         this.ani();
     }
     ani() {
-        if (this.objAni === undefined) return;
-        const time = this.nRollTime * 1000;
-        const num = this.nCurNode;
+        if (this.objAni == undefined) return;
+        const time = cRollArea4.nRollTime * 1000;
+        const num = cRollArea4.nCurNode;
         this.objAni[num].style.transform = 'translateX(-100%)';
         this.objAni[num].style.opacity = 0;
-        this.objAni[num].animate({ ...objDefaultAnit[0], transform: ['translateX(-100%)', 'translateX(0%)'] }, { ...objDefaultAnit[1], duration: time, delay: time / 2 });
+        this.objAni[num].animate({ transform: ['translateX(-100%)', 'translateX(0%)'], opacity: [0, 1] }, { duration: time, delay: time / 2, fill: 'forwards' });
     }
 }
 
@@ -136,7 +114,6 @@ const liPagingVisu = document.querySelectorAll('#visual .main-vis-paging ul li')
 const btnPrevVisu = document.querySelector('#visual .main-vis-paging .prev');
 const btnNextVisu = document.querySelector('#visual .main-vis-paging .next');
 const btnsVisuGo = document.querySelectorAll('#visual .main-vis-banner li .title p a');
-const arrGoVisURL = ['price.html', 'price.html', 'news.html'];
 const cRollVisu = new CMakeRollBanner(ulMainVisu);
 cRollVisu.pagingEle = liPagingVisu;
 cRollVisu.init();
@@ -145,22 +122,16 @@ btnNextVisu.addEventListener('click', (e) => cRollVisu.setRoll(cRollVisu.nCurNod
 btnsVisuGo.forEach((item, idx) => {
     item.addEventListener('mouseenter', (e) => cRollVisu.stopRoll());
     item.addEventListener('mouseleave', (e) => cRollVisu.startRoll());
-    item.addEventListener('click', (e) => {
-        location.href = arrGoVisURL[idx];
-    });
 });
 
 // area1 hover event
 const ulArea1 = document.querySelector('.main .main-area1 .sol-listing');
 const imgArea1 = document.querySelector('.main .main-area1 .sol-bn img');
 const divArea1 = [...document.querySelectorAll('.main .main-area1 .sec-title')];
-const [liArea1, arrGoA1URL] = [[...ulArea1.children], ['cargo.html', 'port.html', 'ship.html']];
+const liArea1 = [...ulArea1.children];
 liArea1.forEach((item, idx) => {
     item.addEventListener('mouseenter', (e) => {
         fSetArea1Hover(idx + 1);
-    });
-    item.addEventListener('click', (e) => {
-        location.href = arrGoA1URL[idx];
     });
 });
 ulArea1.addEventListener('mouseleave', (e) => {
@@ -169,9 +140,10 @@ ulArea1.addEventListener('mouseleave', (e) => {
 function fSetArea1Hover(num = 0) {
     divArea1.forEach((item) => item.classList.remove('on'));
     divArea1[num].classList.add('on');
-    divArea1[num].animate(...objDefaultAnit);
-    imgArea1.animate(...objDefaultAnit);
-    imgArea1.setAttribute('src', `images/main/main-area1-img${num === 0 ? '-default' : num - 1}.jpg`);
+    const ani = [{ opacity: [0, 1] }, { duration: 300 }];
+    divArea1[num].animate(...ani);
+    imgArea1.animate(...ani);
+    imgArea1.setAttribute('src', `images/main/main-area1-img${num}.jpg`);
     imgArea1.setAttribute('alt', document.querySelectorAll('.main .main-area1 .sec-title .title')[num].textContent);
 }
 
@@ -185,6 +157,7 @@ function fObserverInitA3() {
     const obser = new IntersectionObserver((entries, observer) => {
         if (entries[0].intersectionRatio <= 0) return;
         if (entries[0].isIntersecting) {
+            const interval = 1000;
             emCountNum.forEach((item, idx) => {
                 const num = Number(arrCountNum[idx].dataset.count),
                     speed = 250;
@@ -197,7 +170,7 @@ function fObserverInitA3() {
                     if (currnt <= num) {
                         currnt += step;
                         item.textContent = new Intl.NumberFormat().format(currnt.toFixed(0)) + unit;
-                        setTimeout(fCountUp, 10);
+                        setTimeout(fCountUp, 1);
                     } else item.textContent = new Intl.NumberFormat().format(num) + unit;
                 };
                 fCountUp();
@@ -221,7 +194,7 @@ let nCurA3 = 0;
 const fRollArea3Bann = (num = 0) => {
     const cnt = arrImgArea3.length;
     const arrCls = ['before', 'on', 'after'];
-    // let ani = [{ transform: ['scale(1)', 'scale(1.2)'] }, { duration: 400, fill: 'forward' }];
+    // let ani = [{transform:[]},{}];
     const center = 1;
     num = (num < 0 ? cnt - 1 : num) % cnt;
     nCurA3 = num;
@@ -230,14 +203,11 @@ const fRollArea3Bann = (num = 0) => {
     for (let i = 0; i < cnt; i++) {
         let tmp = i - center + nCurA3;
         tmp = (tmp < 0 ? cnt + tmp : tmp) % cnt;
-        if (i === center) {
-            // arrImgArea3[tmp].style.transition = 'none';
-            // arrImgArea3[tmp].animate(...ani);
-        } //else arrImgArea3[tmp].style.transition = 'all 0.4s';
+        // i === center ? ani = ani : null;
         arrImgArea3[tmp].classList.remove(arrImgArea3[tmp].className);
         arrImgArea3[tmp].classList.add(arrCls[i]);
     }
-    divTextArea3.animate({ ...objDefaultAnit[0], transform: ['translateY(50px)', 'translateY(0)'] }, { duration: 1000 });
+    divTextArea3.animate({ opacity: [0, 1], transform: ['translateY(50px)', 'translateY(0)'] }, { duration: 1000 });
 };
 btnNextArea3.addEventListener('click', (e) => {
     fRollArea3Bann(nCurA3 + 1);
@@ -251,6 +221,7 @@ const ulRollArea4 = document.querySelector('.main .main-area4 .suit-banner');
 const ancRollArea4 = document.querySelectorAll('.main .main-area4 .menu-paing a');
 const cRollArea4 = new CRollForA4(ulRollArea4);
 cRollArea4.pagingEle = ancRollArea4;
+cRollArea4.paingClsName = 'on';
 cRollArea4.objAni = document.querySelectorAll('.main .main-area4 .suit-banner li .bg-trans');
 cRollArea4.init();
 
@@ -258,68 +229,89 @@ cRollArea4.init();
 const btnContentCard = document.querySelectorAll('.main .main-area6 article .tab a');
 const newslist = document.querySelector('.news-list');
 const bloglist = document.querySelector('.blog-list');
-const allConList = document.querySelectorAll('.main .main-area6 article .rolling');
 const ulCardList = document.querySelectorAll('.main .main-area6 article .rolling .thums');
-const spanGageBar = document.querySelectorAll('.main .main-area6 article .rolling .contain .processer span');
-const [arrNewsList, arrBlogList] = [strNewsDataURL, blogPost.filter((item) => item.id <= 5)];
-let bViewNews = true,
-    nLiWidth = 1100;
-btnContentCard.forEach((item, idx) => {
-    item.addEventListener('click', (e) => {
-        allConList.forEach(($item) => $item.classList.remove('on'));
-        btnContentCard.forEach(($item) => $item.classList.remove('on'));
-        item.classList.add('on');
-        bViewNews = idx === 0 ? true : false;
-        allConList[idx].animate(...objDefaultAnit);
-        allConList[idx].classList.add('on');
-        // fSetScrollAni(allConList[idx],bViewNews,ulCardList[idx],0);
-        // fSetScrollAni(allConList[idx],bViewNews,spanGageBar[idx],1);
-    });
-});
+const divScrollNavi = document.querySelector('.main .main-area6 .rolling-bar span.on');
+const arrBlogList = [...arrNewsList].sort((a, b) => (a.index > b.index ? -1 : 0));
+const nDefaultGage = parseInt(getComputedStyle(divScrollNavi).width);
+const nMaxGage = Number(getComputedStyle(divScrollNavi).getPropertyValue('--maxGage')) - nDefaultGage;
+let nCaptureY = 0,
+    bCaptureY = false,
+    bScrollEnd = false,
+    bViewNews = true,
+    liCardList = [[], []],
+    nMoveWdth = [];
 function fContListInit(list, arr) {
     const ul = list.querySelector('ul');
-    const cate = list.className.indexOf('news') >= 0 ? true : false;
     ul.innerHTML = '';
     for (let i = 0; i < arr.length; i++) {
         const li = document.createElement('li');
         const p = document.createElement('p');
         const pic = document.createElement('img');
         pic.setAttribute('alt', arr[i].title);
-        pic.setAttribute('src', `./images/main/area6/${cate === true ? 'news' : 'blog'}-img${i}.jpg`);
+        pic.setAttribute('src', arr[i].thumb);
         p.append(pic);
         const span = document.createElement('span');
         span.setAttribute('class', 'title');
         span.textContent = arr[i].title;
         li.addEventListener('click', (e) => {
-            if (cate >= 0) location.href = 'news.html?num=' + (i + 1);
-            else {
-                localStorage.setItem('num', i + 1);
-                location.href = 'blog.html';
-            }
+            location.href = 'news.html';
         });
         li.append(p, span);
         ul.append(li);
     }
-    fSetScrollAni(list, cate, ul, 0);
-    fSetScrollAni(list, cate, spanGageBar[cate === true ? 0 : 1], 1);
 }
-function fSetScrollAni(ele, b, target, n) {
-    const num = fGetWidhHeigh(ulCardList[b === true ? 0 : 1]);
-    nLiWidth = Number.isNaN(num) ? nLiWidth : num;
-    const objScrollWidth = { transform: ['', `translate(${-nLiWidth}px, 730px)`] };
-    const objScrollGege = { transform: ['', 'scaleX(1)'] };
-    const sTL = new ScrollTimeline({ source: ele });
-    target.animate(n === 0 ? objScrollWidth : objScrollGege, { fill: 'forwards', timeline: sTL });
+function fGageReset(flag) {
+    bScrollEnd = false;
+    divScrollNavi.style.width = `${nDefaultGage}px`;
+    liCardList.forEach((list) => list.forEach((item) => (item.style.transform = `translateX(0px)`)));
+    if (flag === true) {
+        newslist.classList.add('on');
+        bloglist.classList.remove('on');
+    } else {
+        newslist.classList.remove('on');
+        bloglist.classList.add('on');
+    }
 }
-function fGetWidhHeigh(list) {
-    const li = [...list.children];
-    const nMoveWdth =
-        li.reduce((acc, crr) => {
-            return acc + parseInt(getComputedStyle(crr).marginLeft) + parseInt(getComputedStyle(crr).marginRight) + parseInt(getComputedStyle(crr).width) + parseInt(getComputedStyle(list).getPropertyValue('gap'));
-        }, 0) -
-        parseInt(getComputedStyle(list).width) -
-        parseInt(getComputedStyle(list).getPropertyValue('gap'));
-    return nMoveWdth;
+function fSetGageBar(e) {
+    const idx = bViewNews ? 0 : 1;
+    const nListTop = Math.round(ulCardList[idx].getBoundingClientRect().y);
+    const nListHgt = Math.round(ulCardList[idx].getBoundingClientRect().height);
+    const bCenterEle = Math.round(window.innerHeight / 1.1) > Math.round(nListTop + nListHgt / 1.1);
+    if (bCenterEle && !bCaptureY) [nCaptureY, bCaptureY] = [window.scrollY, true];
+    if (bCenterEle && window.scrollY - nCaptureY <= nListHgt && !bScrollEnd) {
+        //
+        let [x1, x2] = [(Math.floor(window.scrollY - nCaptureY) * nMaxGage) / nListHgt, (Math.floor(window.scrollY - nCaptureY) * nMoveWdth[idx]) / nListHgt];
+        if (x1 < 0 || x2 < 0) return;
+        divScrollNavi.style.width = `${nDefaultGage + x1}px`;
+        liCardList[idx].forEach((item) => (item.style.transform = `translateX(${-x2}px)`));
+    } else if (bCenterEle && window.scrollY - nCaptureY > nListHgt && !bScrollEnd) {
+        bScrollEnd = true;
+        divScrollNavi.style.width = `${nDefaultGage + nMaxGage}px`;
+        liCardList[idx].forEach((item) => (item.style.transform = `translateX(${-(nMoveWdth[idx] + 120)}px)`));
+    }
 }
 fContListInit(newslist, arrNewsList);
 fContListInit(bloglist, arrBlogList);
+ulCardList.forEach((item, idx) => liCardList[idx].push(...item.children));
+liCardList.forEach((item, idx) => {
+    nMoveWdth[idx] =
+        item.reduce((acc, crr) => {
+            return acc + parseInt(getComputedStyle(crr).marginLeft) + parseInt(getComputedStyle(crr).marginRight) + parseInt(getComputedStyle(crr).width);
+        }, 0) - parseInt(getComputedStyle(ulCardList[idx]).width);
+});
+window.addEventListener('scroll', fSetGageBar);
+btnContentCard.forEach((item, idx) => {
+    item.addEventListener('click', (e) => {
+        const list = document.querySelectorAll('.main .main-area6 article .rolling');
+        list.forEach(($item) => {
+            $item.classList.remove('on');
+            $item.style.opacity = 0;
+        });
+        btnContentCard.forEach(($item) => $item.classList.remove('on'));
+        item.classList.add('on');
+        bViewNews = idx === 0 ? true : false;
+        fGageReset(bViewNews);
+        list[idx].animate({ opacity: [0, 1] }, { duration: 300, delay: 100, fill: 'forwards' });
+        list[idx].classList.add('on');
+    });
+});

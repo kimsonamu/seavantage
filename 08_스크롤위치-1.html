@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+        <link rel="stylesheet" href="css/reset.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css" />
+        <style>
+            .scroll {
+                height: 1000px;
+                display: flex;
+                align-items: center;
+            }
+            .scroll h2 {
+                position: fixed;
+                left: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 300px;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: -18px;
+                opacity: 0.1;
+                width: 100%;
+                word-wrap: none;
+                white-space: nowrap;
+                z-index: -10;
+            }
+
+            .con-box {
+                margin-top: 30px;
+            }
+            .con-box div {
+                width: 1200px;
+                margin: auto;
+                box-sizing: border-box;
+                padding: 80px 0 200px 0;
+            }
+            .con-box div h2 {
+                font-size: 40px;
+                font-weight: 700;
+                margin-bottom: 20px;
+            }
+            .con-box div p {
+                margin-bottom: 40px;
+            }
+
+            .con-box .con3,
+            .con-box .con5 .con-top {
+                display: flex;
+                justify-content: space-between;
+            }
+            .con-box .con3 .con,
+            .con-box .con5 .con {
+                width: 45%;
+            }
+
+            .con-box .con3 .left img,
+            .con-box .con5 .left img {
+                width: 500px;
+                opacity: 0;
+            }
+
+            .con-box .con3 .right,
+            .con-box .con5 .right {
+                width: 600px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            .con-box .con3 .right h3,
+            .con-box .con5 .right h3 {
+                font-size: 40px;
+                font-weight: 500;
+                margin-bottom: 20px;
+            }
+            .con-box .con3 .right strong,
+            .con-box .con5 .right strong {
+                font-size: 25px;
+                margin-bottom: 40px;
+            }
+            .con-box .con3 .right p,
+            .con-box .con5 .right p {
+                font-size: 18px;
+                margin-bottom: 40px;
+            }
+
+            .noaniActive {
+                transform: translateY(45px);
+                opacity: 0;
+                transition: 0.3s;
+            }
+            .aniActive {
+                animation: aniY 0.3s linear forwards;
+            }
+            @keyframes aniY {
+                0% {
+                    transform: translateY(45px);
+                    opacity: 0;
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateY(0px);
+                }
+            }
+
+            .noaniActiveX {
+                transform: translateX(45px);
+                opacity: 0;
+            }
+            .aniActiveX {
+                animation: aniX 0.3s linear forwards;
+            }
+            @keyframes aniX {
+                0% {
+                    transform: translateX(45px);
+                    opacity: 0;
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateX(0px);
+                }
+            }
+
+            .pic img {
+                position: fixed;
+                width: 200px;
+            }
+            .pic img:first-child {
+                left: 100px;
+                top: 0px;
+                border: 1px solid #000;
+            }
+            .pic img:last-child {
+                right: 100px;
+                bottom: 0px;
+            }
+
+            .text {
+                height: 300px;
+                width: 300px;
+                position: fixed;
+                right: -100px;
+                top: -100px;
+                /* border: 1px solid #000; */
+                animation: ani 10s linear infinite;
+            }
+
+            @keyframes ani {
+                0% {
+                    transform: rotate(0deg);
+                }
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+            .text span {
+                display: block;
+                position: absolute;
+                left: 50%;
+                font-size: 25px;
+                transform-origin: 0px 180px;
+                text-transform: uppercase;
+                font-weight: 700;
+                opacity: 0.5;
+            }
+
+            .con-box .con5 .box {
+                width: 1600px;
+                overflow-x: scroll;
+            }
+            .con-box .con5 .box ul {
+                display: flex;
+                justify-content: space-between;
+                margin-top: 80px;
+                width: 4000px;
+            }
+            .con-box .con5 ul li {
+                flex: 1;
+                width: 400px;
+                height: 400px;
+                border: 1px solid #000;
+                text-align: center;
+                line-height: 300px;
+                font-size: 25px;
+            }
+        </style>
+    </head>
+    <body>
+        <p class="text"></p>
+
+        <div class="scroll">
+            <h2>web project</h2>
+        </div>
+
+        <div class="con-box">
+            <div class="con1">
+                <h2>타이틀0</h2>
+                <p>
+                    어떻어야 그러나 이어받아 안 얼마나, 가다. 결여된 좋다 없어 최근을 내부를 자신의
+                    하다. 세계의 경상을 크어 없이 나머지에 기업은 곡조에 그가 공간의 얽히다. 같다
+                    집의 그런 61퍼센트 하며 튀긴다. 되다 우연찮는 삼은 고맙고 뿐 들어가다. 필요대로
+                    같고 친근할 위할 그 우리나라를 여자를 고맙으소. 딸부터 것 부릴 최초의 들이쉬죠.
+                    청한 전업은 48대 아니는 보다 듯하다. 기상이 노동자를 표방하는 오니 때로 수 우우
+                    띕니까.
+                </p>
+                <p>
+                    이르어서 속도는 임종이 묻어 우리만 말하느니 구인 있오. 오는 있을, 위하러
+                    추억거리는 통과하여 때는 물건을 것 공부를 한다. 입을 다양하다 유권자라도 자신에,
+                    어떻어 여자와 그렇고 고향을 대시하지 눕히어요. 희로애락을 산이나 헛일에서 일은
+                    발표하여 현대다 상대적은 극에서 강간하고서 씨 하다. 대가리에 사면의 아닌 눈물의,
+                    아인 후가 것 없는 진행되다 있다. 아니는 찾으면 이루어지면 드리다 넘다.
+                </p>
+                <p>
+                    흔히 위하게 구축의 것 문화를 턱없이 이 민망스럽다. 우리의 대하여 결과적이요
+                    선수권에 있게 할머니나 온지. 면수에 통할래 진부한 한 무역으로 분석하라 국민이,
+                    비롯함 물론 대상이 듯할까. 블라우스가 고치다, 비슷하여 아침도 어둠의 흐르다
+                    과목과 포구도 있어 잔업이어 합니다. 담뱃불의 생명을 중순이 굶습니다 것 뛰어나다.
+                </p>
+            </div>
+            <div class="con2">
+                <h2>타이틀2</h2>
+                <p>
+                    어떻어야 그러나 이어받아 안 얼마나, 가다. 결여된 좋다 없어 최근을 내부를 자신의
+                    하다. 세계의 경상을 크어 없이 나머지에 기업은 곡조에 그가 공간의 얽히다. 같다
+                    집의 그런 61퍼센트 하며 튀긴다. 되다 우연찮는 삼은 고맙고 뿐 들어가다. 필요대로
+                    같고 친근할 위할 그 우리나라를 여자를 고맙으소. 딸부터 것 부릴 최초의 들이쉬죠.
+                    청한 전업은 48대 아니는 보다 듯하다. 기상이 노동자를 표방하는 오니 때로 수 우우
+                    띕니까.
+                </p>
+                <p>
+                    이르어서 속도는 임종이 묻어 우리만 말하느니 구인 있오. 오는 있을, 위하러
+                    추억거리는 통과하여 때는 물건을 것 공부를 한다. 입을 다양하다 유권자라도 자신에,
+                    어떻어 여자와 그렇고 고향을 대시하지 눕히어요. 희로애락을 산이나 헛일에서 일은
+                    발표하여 현대다 상대적은 극에서 강간하고서 씨 하다. 대가리에 사면의 아닌 눈물의,
+                    아인 후가 것 없는 진행되다 있다. 아니는 찾으면 이루어지면 드리다 넘다.
+                </p>
+                <p>
+                    흔히 위하게 구축의 것 문화를 턱없이 이 민망스럽다. 우리의 대하여 결과적이요
+                    선수권에 있게 할머니나 온지. 면수에 통할래 진부한 한 무역으로 분석하라 국민이,
+                    비롯함 물론 대상이 듯할까. 블라우스가 고치다, 비슷하여 아침도 어둠의 흐르다
+                    과목과 포구도 있어 잔업이어 합니다. 담뱃불의 생명을 중순이 굶습니다 것 뛰어나다.
+                </p>
+            </div>
+            <div class="con3">
+                <div class="con left">
+                    <img src="images/photo1.jpg" alt="" class="ani-scroll" />
+                </div>
+                <div class="con right">
+                    <h3 class="ani-scroll">타이틀 연습</h3>
+                    <strong class="ani-scroll">안녕하세요</strong>
+                    <p class="ani-scroll">
+                        어떻어야 그러나 이어받아 안 얼마나, 가다. 결여된 좋다 없어 최근을 내부를
+                        자신의 하다. 세계의 경상을 크어 없이 나머지에 기업은 곡조에 그가 공간의
+                        얽히다.
+                    </p>
+                </div>
+            </div>
+            <div class="con4">
+                <h2>타이틀3</h2>
+                <p>
+                    어떻어야 그러나 이어받아 안 얼마나, 가다. 결여된 좋다 없어 최근을 내부를 자신의
+                    하다. 세계의 경상을 크어 없이 나머지에 기업은 곡조에 그가 공간의 얽히다. 같다
+                    집의 그런 61퍼센트 하며 튀긴다. 되다 우연찮는 삼은 고맙고 뿐 들어가다. 필요대로
+                    같고 친근할 위할 그 우리나라를 여자를 고맙으소. 딸부터 것 부릴 최초의 들이쉬죠.
+                    청한 전업은 48대 아니는 보다 듯하다. 기상이 노동자를 표방하는 오니 때로 수 우우
+                    띕니까.
+                </p>
+                <p>
+                    이르어서 속도는 임종이 묻어 우리만 말하느니 구인 있오. 오는 있을, 위하러
+                    추억거리는 통과하여 때는 물건을 것 공부를 한다. 입을 다양하다 유권자라도 자신에,
+                    어떻어 여자와 그렇고 고향을 대시하지 눕히어요. 희로애락을 산이나 헛일에서 일은
+                    발표하여 현대다 상대적은 극에서 강간하고서 씨 하다. 대가리에 사면의 아닌 눈물의,
+                    아인 후가 것 없는 진행되다 있다. 아니는 찾으면 이루어지면 드리다 넘다.
+                </p>
+                <p>
+                    흔히 위하게 구축의 것 문화를 턱없이 이 민망스럽다. 우리의 대하여 결과적이요
+                    선수권에 있게 할머니나 온지. 면수에 통할래 진부한 한 무역으로 분석하라 국민이,
+                    비롯함 물론 대상이 듯할까. 블라우스가 고치다, 비슷하여 아침도 어둠의 흐르다
+                    과목과 포구도 있어 잔업이어 합니다. 담뱃불의 생명을 중순이 굶습니다 것 뛰어나다.
+                </p>
+            </div>
+            <div class="con5">
+                <div class="con-top">
+                    <div class="con left">
+                        <img src="images/photo1.jpg" alt="" class="ani-scroll" />
+                    </div>
+                    <div class="con right">
+                        <h3 class="ani-scroll">타이틀 연습</h3>
+                        <strong class="ani-scroll">안녕하세요</strong>
+                        <p class="ani-scroll">
+                            어떻어야 그러나 이어받아 안 얼마나, 가다. 결여된 좋다 없어 최근을 내부를
+                            자신의 하다. 세계의 경상을 크어 없이 나머지에 기업은 곡조에 그가 공간의
+                            얽히다.
+                        </p>
+                    </div>
+                </div>
+
+                <article class="box">
+                    <ul class="list">
+                        <li>test1</li>
+                        <li>test1</li>
+                        <li>test1</li>
+                        <li>test1</li>
+                        <li>test1</li>
+                        <li>test1</li>
+                        <li>test1</li>
+                        <li>test1</li>
+                        <li>test1</li>
+                        <li>test1</li>
+                    </ul>
+                </article>
+            </div>
+            <div class="con6">
+                <h2>타이틀3</h2>
+                <p>
+                    어떻어야 그러나 이어받아 안 얼마나, 가다. 결여된 좋다 없어 최근을 내부를 자신의
+                    하다. 세계의 경상을 크어 없이 나머지에 기업은 곡조에 그가 공간의 얽히다. 같다
+                    집의 그런 61퍼센트 하며 튀긴다. 되다 우연찮는 삼은 고맙고 뿐 들어가다. 필요대로
+                    같고 친근할 위할 그 우리나라를 여자를 고맙으소. 딸부터 것 부릴 최초의 들이쉬죠.
+                    청한 전업은 48대 아니는 보다 듯하다. 기상이 노동자를 표방하는 오니 때로 수 우우
+                    띕니까.
+                </p>
+                <p>
+                    이르어서 속도는 임종이 묻어 우리만 말하느니 구인 있오. 오는 있을, 위하러
+                    추억거리는 통과하여 때는 물건을 것 공부를 한다. 입을 다양하다 유권자라도 자신에,
+                    어떻어 여자와 그렇고 고향을 대시하지 눕히어요. 희로애락을 산이나 헛일에서 일은
+                    발표하여 현대다 상대적은 극에서 강간하고서 씨 하다. 대가리에 사면의 아닌 눈물의,
+                    아인 후가 것 없는 진행되다 있다. 아니는 찾으면 이루어지면 드리다 넘다.
+                </p>
+                <p>
+                    흔히 위하게 구축의 것 문화를 턱없이 이 민망스럽다. 우리의 대하여 결과적이요
+                    선수권에 있게 할머니나 온지. 면수에 통할래 진부한 한 무역으로 분석하라 국민이,
+                    비롯함 물론 대상이 듯할까. 블라우스가 고치다, 비슷하여 아침도 어둠의 흐르다
+                    과목과 포구도 있어 잔업이어 합니다. 담뱃불의 생명을 중순이 굶습니다 것 뛰어나다.
+                </p>
+            </div>
+            <div class="con7">
+                <h2>타이틀3</h2>
+                <p>
+                    어떻어야 그러나 이어받아 안 얼마나, 가다. 결여된 좋다 없어 최근을 내부를 자신의
+                    하다. 세계의 경상을 크어 없이 나머지에 기업은 곡조에 그가 공간의 얽히다. 같다
+                    집의 그런 61퍼센트 하며 튀긴다. 되다 우연찮는 삼은 고맙고 뿐 들어가다. 필요대로
+                    같고 친근할 위할 그 우리나라를 여자를 고맙으소. 딸부터 것 부릴 최초의 들이쉬죠.
+                    청한 전업은 48대 아니는 보다 듯하다. 기상이 노동자를 표방하는 오니 때로 수 우우
+                    띕니까.
+                </p>
+                <p>
+                    이르어서 속도는 임종이 묻어 우리만 말하느니 구인 있오. 오는 있을, 위하러
+                    추억거리는 통과하여 때는 물건을 것 공부를 한다. 입을 다양하다 유권자라도 자신에,
+                    어떻어 여자와 그렇고 고향을 대시하지 눕히어요. 희로애락을 산이나 헛일에서 일은
+                    발표하여 현대다 상대적은 극에서 강간하고서 씨 하다. 대가리에 사면의 아닌 눈물의,
+                    아인 후가 것 없는 진행되다 있다. 아니는 찾으면 이루어지면 드리다 넘다.
+                </p>
+                <p>
+                    흔히 위하게 구축의 것 문화를 턱없이 이 민망스럽다. 우리의 대하여 결과적이요
+                    선수권에 있게 할머니나 온지. 면수에 통할래 진부한 한 무역으로 분석하라 국민이,
+                    비롯함 물론 대상이 듯할까. 블라우스가 고치다, 비슷하여 아침도 어둠의 흐르다
+                    과목과 포구도 있어 잔업이어 합니다. 담뱃불의 생명을 중순이 굶습니다 것 뛰어나다.
+                </p>
+            </div>
+        </div>
+
+        <div class="pic">
+            <img src="images/img1.gif" alt="" />
+            <img src="images/img2.png" alt="" />
+        </div>
+
+        <script>
+            let ty = 0;
+
+            let ainscroll = document.querySelectorAll('.con3 .ani-scroll');
+            let con3 = document.querySelector('.con3');
+            let con5 = document.querySelector('.con5 .box');
+            let isscroll = false;
+
+            window.addEventListener('scroll', () => {
+                let con3Rect = con3.getBoundingClientRect();
+                let con5Rect = con5.getBoundingClientRect();
+                // console.log(con5Rect.y);
+                ty = window.scrollY;
+                console.log('ty :', ty);
+
+                if (con3Rect.y <= 450) {
+                    ainscroll[0].classList.add('aniActive');
+                    ainscroll[0].style.opacity = 1;
+                    setTimeout(() => {
+                        ainscroll[1].classList.add('aniActive');
+                        ainscroll[1].style.opacity = 1;
+                    }, 200);
+
+                    setTimeout(() => {
+                        ainscroll[2].classList.add('aniActive');
+                        ainscroll[2].style.opacity = 1;
+                    }, 400);
+
+                    setTimeout(() => {
+                        ainscroll[3].classList.add('aniActive');
+                        ainscroll[3].style.opacity = 1;
+                    }, 600);
+                } else {
+                    ainscroll[0].classList.remove('aniActive');
+                    ainscroll[0].style.opacity = 0;
+
+                    setTimeout(() => {
+                        ainscroll[1].classList.remove('aniActive');
+                        ainscroll[1].style.opacity = 0;
+                    }, 200);
+
+                    setTimeout(() => {
+                        ainscroll[2].classList.remove('aniActive');
+                        ainscroll[2].style.opacity = 0;
+                    }, 400);
+
+                    setTimeout(() => {
+                        ainscroll[3].classList.remove('aniActive');
+                        ainscroll[3].style.opacity = 0;
+                    }, 600);
+                }
+
+                // if (con5Rect.y < 150 && con3Rect.y >= -150) {
+                if (ty >= 5100) {
+                    // console.log(con5Rect.y);
+                    isscroll = true;
+                    window.scrollTo(0, 5100);
+                }
+            });
+
+            let ul = document.querySelector('.con5 .box ul');
+            window.addEventListener('wheel', (e) => {
+                if (isscroll) {
+                    console.log(e.deltaY);
+                    ul.style.marginLeft = `${(10 * -e.deltaY) / 10}px`;
+                }
+                // if(ul의 위치가 맨끝이면 false로 전달 )
+                // console.log(e.deltaY, e.deltaX);
+            });
+        </script>
+    </body>
+</html>
