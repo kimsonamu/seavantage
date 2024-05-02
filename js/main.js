@@ -34,10 +34,32 @@ const stickyHeader = () => {
 stickyHeader();
 
 // scroll paging
-const areas = [...document.querySelectorAll('.main .areas')];
-areas.forEach((item, idx) => {
-    // console.log(item.getBoundingClientRect().top);
+let arrGetSectionTops = [];
+function fGetAreaTops() {
+    return [...document.querySelectorAll('.main .areas')].map((item) => item.getBoundingClientRect().top);
+}
+arrGetSectionTops = fGetAreaTops();
+window.addEventListener('resize', (e) => {
+    arrGetSectionTops = fGetAreaTops();
 });
+window.addEventListener('load', (e) => {
+    window.scroll({ top: 0 });
+    arrGetSectionTops = fGetAreaTops();
+});
+let nNowScrollTop = 0;
+window.addEventListener(
+    'wheel',
+    (e) => {
+        nNowScrollTop = window.scrollY;
+        let t = e.deltaY > 0 ? arrGetSectionTops.find((num) => nNowScrollTop < num) : arrGetSectionTops.findLast((num) => nNowScrollTop > num);
+        t = t === undefined && e.deltaY < 0 ? 0 : t;
+        if (t !== undefined) {
+            e.preventDefault();
+            window.scroll({ top: t, behavior: 'smooth' });
+        }
+    },
+    { passive: false }
+);
 
 // area5 between 6 banner link
 const btnGoCustom = document.querySelector('.main .band-banner');

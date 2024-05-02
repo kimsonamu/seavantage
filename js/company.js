@@ -2,7 +2,8 @@
     create by kimsona
     at 2024-04-25
 --------------------------------------------------------------------*/
-import arrNewsList from './news.con.js';
+import { strNewsDataURL } from './data.js';
+const arrNewsList = strNewsDataURL;
 // ------------------------ for main page ------------------------------ //
 function fMainPageInit() {
     //
