@@ -506,13 +506,25 @@
     transform: translateX(-50%);
     bottom: 0;
 }
+.main .main-area4 .menu-paing span {
+    opacity: 1;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    position: absolute;
+    left: 0;
+    top: -5px;
+    z-index: -1;
+    transition: left, transform 0.4s;
+}
 .main .main-area4 .menu-paing a {
     font-size: 30px;
     color: #fff;
     position: relative;
     font-weight: 700;
 }
-.main .main-area4 .menu-paing a.on::after {
+/* .main .main-area4 .menu-paing a.on::after {
     content: '';
     width: 30px;
     height: 30px;
@@ -522,7 +534,7 @@
     right: -10px;
     top: -5px;
     z-index: -1;
-}
+} */
 /* area5 */
 .main .main-area5 {
     display: flex;

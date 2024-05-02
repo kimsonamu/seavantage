@@ -33,6 +33,12 @@ const stickyHeader = () => {
 };
 stickyHeader();
 
+// scroll paging
+const areas = [...document.querySelectorAll('.main .areas')];
+areas.forEach((item, idx) => {
+    // console.log(item.getBoundingClientRect().top);
+});
+
 // area5 between 6 banner link
 const btnGoCustom = document.querySelector('.main .band-banner');
 btnGoCustom.addEventListener('click', (e) => {
@@ -113,6 +119,8 @@ class CMakeRollBanner {
 }
 class CRollForA4 extends CMakeRollBanner {
     static objAni;
+    bPagingAni = false;
+    spanDot = document.querySelector('.main .main-area4 .menu-paing span');
     constructor(ele) {
         super(ele);
     }
@@ -127,6 +135,19 @@ class CRollForA4 extends CMakeRollBanner {
         this.objAni[num].style.transform = 'translateX(-100%)';
         this.objAni[num].style.opacity = 0;
         this.objAni[num].animate({ ...objDefaultAnit[0], transform: ['translateX(-100%)', 'translateX(0%)'] }, { ...objDefaultAnit[1], duration: time, delay: time / 2 });
+    }
+    paging(num = 0) {
+        super.paging(num);
+        if (this.bPagingAni === false) return;
+        this.pagingAniSet(this.pagingEle[num]);
+    }
+    pagingAniSet(ele) {
+        const wid = ele.getBoundingClientRect().left + ele.getBoundingClientRect().width - this.spanDot.getBoundingClientRect().width + 10 - ele.parentElement.getBoundingClientRect().left;
+        const ani = [
+            { transform: ['', `translateX(${wid}px)`], opacity: [0, 1] },
+            { duration: 400, fill: 'forwards' },
+        ];
+        this.spanDot.animate(...ani);
     }
 }
 
@@ -253,7 +274,19 @@ const ancRollArea4 = document.querySelectorAll('.main .main-area4 .menu-paing a'
 const cRollArea4 = new CRollForA4(ulRollArea4);
 cRollArea4.pagingEle = ancRollArea4;
 cRollArea4.objAni = document.querySelectorAll('.main .main-area4 .suit-banner li .bg-trans');
+cRollArea4.bPagingAni = true;
 cRollArea4.init();
+ulRollArea4.addEventListener('mouseenter', (e) => {
+    cRollArea4.stopRoll();
+});
+ulRollArea4.addEventListener('mouseleave', (e) => {
+    cRollArea4.startRoll();
+});
+ancRollArea4.forEach((item, idx) => {
+    item.addEventListener('click', (e) => {
+        cRollArea4.pagingAniSet(item);
+    });
+});
 
 // area6 scroll
 const btnContentCard = document.querySelectorAll('.main .main-area6 article .tab a');
