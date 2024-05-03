@@ -264,7 +264,7 @@ const iotScroll = () => {
         }
     });
     $videoArea.addEventListener('wheel', (e) => {
-        document.body.style.overflow = 'hidden';
+        e.preventDefault();
         if (!timer) {
             timer = setTimeout(() => {
                 timer = null;
@@ -281,9 +281,6 @@ const iotScroll = () => {
                 }
             }, 1000);
         }
-    });
-    window.addEventListener('click', (e) => {
-        document.body.style.overflow = 'unset';
     });
 };
 /* --------------------------------------------------------------------

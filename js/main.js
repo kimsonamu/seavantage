@@ -47,7 +47,7 @@ const fWheelPage = (e) => {
     const k = e.ctrlKey || e.shiftKey || e.altKey || e.metaKey;
     if (ty !== undefined && k !== true) {
         e.preventDefault();
-        window.scroll({ top: ty, behavior: 'smooth' });
+        window.scroll({ top: ty + 5, behavior: 'smooth' });
     }
 };
 window.addEventListener('resize', (e) => {
