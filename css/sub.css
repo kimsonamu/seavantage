@@ -274,12 +274,12 @@
 
 .about .con3 .box-wrap .box-right .top .txt2 {
     position: absolute;
-    top: 20px;
-    right: 136px;
+    top: 15px;
+    right: 60px;
 }
 .about .con3 .box-wrap .box-right .top .txt2 .title,
 .about .con3 .box-wrap .box-right .bottom .txt2 .title {
-    font-size: 24px;
+    font-size: 21px;
     color: var(--primary-color);
     font-weight: 500;
 }
@@ -287,11 +287,11 @@
 .about .con3 .box-wrap .box-right .bottom .txt2 .list {
     color: #fff;
     font-weight: 300;
-    text-indent: 18px;
+    text-indent: 10px;
 }
 .about .con3 .box-wrap .box-right .top .txt2 .list li,
 .about .con3 .box-wrap .box-right .bottom .txt2 .list li {
-    line-height: 198%;
+    line-height: 160%;
 }
 
 .about .con3 .box-wrap .box-right .bottom {
@@ -303,7 +303,7 @@
 .about .con3 .box-wrap .box-right .bottom .txt2 {
     position: absolute;
     top: 98px;
-    right: 100px;
+    right: 20px;
 }
 /* con3 end */
 
