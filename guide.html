@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>사용자 가이드</title>
+        <link rel="shortcut icon" href="images/common/favicon.ico" />
+        <link rel="stylesheet" href="css/reset.css" />
+        <link rel="stylesheet" href="css/sublayout.css" />
+        <link rel="stylesheet" href="css/common.css" />
+        <link rel="stylesheet" href="css/sub.css" />
+        <link rel="stylesheet" href="css/ani.css" />
+        <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css" />
+    </head>
+    <body>
+        <p id="skipNav" class="blind"><a href="#content">본문 바로가기</a></p>
+        <div id="wrap">
+            <header id="header">
+                <div class="type black"></div>
+            </header>
+            <section id="subVisual">
+                <div class="inner">
+                    <span>
+                        <a href="index.html">HOME</a><i class="bx bx-chevron-right"></i> <a href="">서비스</a><i class="bx bx-chevron-right"></i>
+                        <a href="guide.html">사용자 가이드</a>
+                    </span>
+                    <div class="title">
+                        <h2>사용자 가이드</h2>
+                        <p>
+                            씨벤티지 SVMP 사용자 가이드에 오신 것을 환영합니다!<br />
+                            가이드에서 원하는 내용을 찾을 수 없다면 지원팀(support@seavantage.com)에 이메일을 보내주세요!
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <main id="container" class="page guide mb150">
+                <section id="content">
+                    <div class="inner">
+                        <div class="tab-bar">
+                            <ul class="tab">
+                                <li class="on" data-id="0"><a href="#">전체</a></li>
+                                <li data-id="1"><a href="#">일반사항</a></li>
+                                <li data-id="2"><a href="#">Cargo Insight</a></li>
+                                <li data-id="3"><a href="#">Ship Insight</a></li>
+                                <li data-id="4"><a href="#">Port Insight</a></li>
+                                <li data-id="5"><a href="#">IoT Cargo Monitoring</a></li>
+                            </ul>
+                            <p class="search">
+                                <input type="text" name="search-word" placeholder="검색어를 입력하세요." onfocus="this.placeholder = ''" onblur="this.placeholder = '검색어를 입력하세요'" />
+                                <button>검색</button>
+                            </p>
+                        </div>
+                        <table>
+                            <caption>
+                                사용자 가이드
+                            </caption>
+                            <colgroup>
+                                <col class="id" />
+                                <col class="cate" />
+                                <col class="title" />
+                                <col class="date" />
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <td>번호</td>
+                                    <td>카테고리</td>
+                                    <td>제목</td>
+                                    <td>등록일</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Iot Cargo Monitoring</td>
+                                    <td><a href="#">게시판제목. 제목이 너무 길어질 경우 dot처리</a></td>
+                                    <td>2024.01.01</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="guide-paging">
+                            <!-- <a href="#">prev</a>
+                            <a href="#" class="on">1</a>
+                            <a href="#">2</a>
+                            <a href="#">3</a>
+                            <a href="#">next</a> -->
+                        </p>
+                    </div>
+                </section>
+            </main>
+            <!-- main end -->
+            <footer id="footer"></footer>
+            <!-- footer 나중 연결 -->
+        </div>
+        <script src="js/common.js"></script>
+        <script type="module" src="js/sub.js"></script>
+        <!-- <script type="module">
+            import { guideList } from './js/guide.js';
+            guideList();
+        </script> -->
+    </body>
+</html>

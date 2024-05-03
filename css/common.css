@@ -23,9 +23,10 @@
 }
 #wrap {
     width: 100%;
-    min-width: 1600px;
+    min-width: 1800px;
+    margin: auto;
     position: relative;
-    user-select: none;
+    /* user-select: none; */
     letter-spacing: -0.5px;
 }
 
@@ -68,7 +69,9 @@
 #header .type {
     height: 80px;
     overflow: hidden;
-    transition: 0.3s ease-in-out;
+}
+#header .type.ani {
+    transition: 0.3s;
 }
 #header .type.on {
     height: 350px;

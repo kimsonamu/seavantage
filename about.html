@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <title>about SeaVentage</title>
-        <link rel="stylesheet" href="./css/reset.css" />
-        <link rel="stylesheet" href="./css/common.css" />
-        <link rel="stylesheet" href="./css/sublayout.css" />
-        <link rel="stylesheet" href="./css/sub.css" />
+        <title>about</title>
+        <link rel="stylesheet" href="css/reset.css" />
+        <link rel="stylesheet" href="css/common.css" />
+        <link rel="stylesheet" href="css/sub.css" />
+        <link rel="stylesheet" href="css/ani.css" />
         <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css" />
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <link rel="shortcut icon" href="images/common/favicon.ico" />
     </head>
     <body>
         <p id="skipNav" class="blind"><a href="#content">본문 바로가기</a></p>
@@ -18,39 +18,278 @@
                 <div class="type trans"></div>
             </header>
 
-            <section id="subVisual" class="type-img news">
-                <div class="inner">
-                    <span>
-                        <a href="index.html">HOME</a><i class="bx bx-chevron-right"></i> <a href="about.html">회사소개</a><i class="bx bx-chevron-right"></i>
-                        <a href="about.html">씨벤티지에 대하여</a>
-                    </span>
-                    <div class="title">
-                        <h2>씨벤티지</h2>
-                        <p>씨벤티지 새소식을 확인해 보세요.</p>
-                    </div>
+            <section id="aboutVisual">
+                <div class="txt">
+                    <h2>
+                        <strong>데이터 분석 기반</strong>의 신뢰할 수 있는<br />
+                        예측 정보를 제공합니다.
+                    </h2>
+                    <p>
+                        씨벤티지는 물류 IT 분야 스타트업으로 수출입 물류 기업들의<br />
+                        효율적인 공급망 관리를 도와주는 가시화 플랫폼 ' SVMP'를 개발하여<br />
+                        서비스하고 있습니다.
+                    </p>
+                </div>
+                <div class="bg">
+                    <video src="./vid/about/about_visual.mp4" autoplay muted loop></video>
                 </div>
             </section>
 
-            <main id="container" class="page aboutSeaV">
-                <section id="content">
-                    <div class="inner">
-                        <div class="blank">&nbsp;</div>
-                        <ul class="recRollTest">
-                            <li><a href="#">test1</a></li>
-                            <li><a href="#">test2</a></li>
-                            <li><a href="#">test3</a></li>
-                            <li><a href="#">test4</a></li>
-                            <li><a href="#">test5</a></li>
-                            <li><a href="#">test6</a></li>
-                        </ul>
+            <main id="container" class="page about">
+                <!-- <div class="inner"> -->
+                <div class="con1">
+                    <div class="txt">
+                        <b class="ani-scroll noaniActive">TECHNOLOGY</b>
+                        <h2 class="ani-scroll noaniActive">해양 빅데이터 통합</h2>
+                        <p class="ani-scroll noaniActive">해양 빅데이터 분석을 통해 선박 & 물류 추적, 항구 혼잡도 등 공급망 관리에<br />필수적인 데이터와 인사이트를 제공합니다.</p>
                     </div>
-                </section>
+                    <div class="box-wrap">
+                        <div class="box-left ani-scroll noaniActive">
+                            <strong>씨벤티지 고유 데이터</strong>
+                            <img src="./images/content/about/sea-data.png" alt="해상교통네트워크,항구분석데이터,선박움직임분석" />
+                            <ul>
+                                <li>
+                                    <em>해상 교통 네트워크</em>
+                                    <p>경로 예측</p>
+                                </li>
+                                <li>
+                                    <em>항구 분석 데이터</em>
+                                    <p>터미널/선석</p>
+                                </li>
+                                <li>
+                                    <em>선박 움직임 분석</em>
+                                    <p>도착시간/목적지 예측</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <img src="./images/content/about/circle-icon.png" alt="더하기" class="plus" />
+                        <div class="box-right ani-scroll noaniActive">
+                            <strong>데이터 마이닝 & 구독</strong>
+                            <img src="./images/content/about/data-mining.png" alt="해상물류데이터,선박위치데이터,해양기상데이터" />
+                            <ul>
+                                <li>
+                                    <em>해양 물류 데이터</em>
+                                    <p>스케줄, B/L</p>
+                                </li>
+                                <li>
+                                    <em>선박 위치 데이</em>
+                                    <p>AIS</p>
+                                </li>
+                                <li>
+                                    <em>해양 기상 데이터</em>
+                                    <p>조류/태풍 등</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="con2">
+                    <h2>AI & Big Data 기반 데이터 분석</h2>
+                    <ul class="list">
+                        <li>
+                            <p>하루 평균 분석데이터</p>
+                            <strong><span data-num="1000" class="num1">xx</span>만+</strong>
+                        </li>
+                        <li>
+                            <p>선박</p>
+                            <strong><span data-num="40" class="num2">xx</span>만+</strong>
+                        </li>
+                        <li>
+                            <p>항구</p>
+                            <strong><span data-num="5000" class="num3">xx</span>+</strong>
+                        </li>
+                        <li>
+                            <p>선사스케줄</p>
+                            <strong><span data-num="95" class="num4">xx</span>%</strong>
+                        </li>
+                    </ul>
+                    <div class="bg-wave">
+                        <img src="./images/content/about/2.png" alt="움직이는파도1" class="wave1" />
+                        <img src="./images/content/about/1.png" alt="움직이는파도2" class="wave2" />
+                    </div>
+                    <div class="box"></div>
+                </div>
+                <!-- </div> -->
+                <div class="con3">
+                    <div class="inner">
+                        <div class="txt ani-scroll noaniActive">
+                            <h2>빅데이터 기반 도착 시간 예측</h2>
+                            <p>
+                                경험 기반으로 제공되는 ETA와 달리 씨벤티지의
+                                <em>Predicted Time of Arrival</em> (PTA)는<br />
+                                AI 기반 항로 네트워크와 알고리즘을 바탕으로 정확한 선박 도착시간을 예측합니다.
+                            </p>
+                        </div>
+
+                        <div class="box-wrap">
+                            <div class="box-left">
+                                <video src="./vid/about/technology_video.mp4" autoplay loop muted></video>
+                            </div>
+
+                            <div class="box-right">
+                                <div class="top ani-scroll noaniActive">
+                                    <img src="./images/content/about/con3-1.png" alt="gray box" />
+                                    <ul class="txt2">
+                                        <li class="title">PTA</li>
+                                        <ul class="list">
+                                            <li>데이터 & 머신러닝 기반 계산</li>
+                                            <li>실시간 업데이트, 정보 독립적</li>
+                                            <li>높은 정확도</li>
+                                        </ul>
+                                    </ul>
+                                </div>
+
+                                <div class="bottom ani-scroll noaniActive">
+                                    <img src="./images/content/about/con3-2.png" alt="gray box" />
+                                    <ul class="txt2">
+                                        <li class="title">ETA</li>
+                                        <ul class="list">
+                                            <li>선사제공, 경험 기반 단순 계산</li>
+                                            <li>비 정기 업데이트, 높은 정보 의존도</li>
+                                            <li>낮은 정확도</li>
+                                        </ul>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="con4">
+                    <div class="box-left">
+                        <img src="./images/content/about/seavantage_logo 1.png" alt="logo" />
+                        <div class="txt">
+                            <b class="btn re-btn on">이력</b>
+                            <b class="btn aw-btn">수상/특허</b>
+                        </div>
+                    </div>
+                    <div class="box-right">
+                        <div class="record">
+                            <div class="img-box">
+                                <img src="./images/content/about/record-img.png" alt="이력구조이미지" />
+                            </div>
+                            <div class="txt">
+                                <em>
+                                    2018<br />
+                                    ㅣ<br />
+                                    2022
+                                </em>
+                                <ul>
+                                    <li>
+                                        <b>2018S</b>
+                                        <p>
+                                            2018. 05 씨벤티지 설립(자본금 480백만원)<br />
+                                            2018. 09 자본금 증자(611백만원)<br />
+                                            2018. 09 투자유치(린드먼아시아인베스트먼트, Angel Round)<br />
+                                            2018. 12 SVMP SaaS API Service 런칭
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <b>2019S</b>
+                                        <p>
+                                            SVMP Bespoke Service 2019. 10<br />
+                                            자본금 증가 (731백만원) 2019. 12<br />
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <b>2020S</b>
+                                        <p>2020. 06 투자유치 (블루포인트파트너스, Seed Round)</p>
+                                    </li>
+                                    <li>
+                                        <b>2021S</b>
+                                        <p>
+                                            SVMP SaaS Web Service 런칭 2021. 11<br />
+                                            (정식서비스 ㅣ Cargo Insight, Port Insight, Terminal Insight)
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <b>2022S</b>
+                                        <p>
+                                            2022. 03 지사설립(Seattle, USA)<br />
+                                            2022. 12 투자유치(위벤처스, IBK Capital, BDC Labs,<br />
+                                        </p>
+                                        <p>린드먼아시아인베스트먼트, Pre-A Round)</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="awards off">
+                            <div class="img-box">
+                                <img src="./images/content/about/awards-img.png" alt="수상구조이미지" />
+                            </div>
+                            <div class="txt">
+                                <em>
+                                    2018<br />
+                                    ㅣ<br />
+                                    2023
+                                </em>
+                                <ul>
+                                    <li>
+                                        <b>2018S</b>
+                                        <p>2018. 11 벤처기업인증 (KVCA)</p>
+                                    </li>
+                                    <li>
+                                        <b>2019S</b>
+                                        <p>
+                                            특허출원
+                                            <span>(선박의 효율운항을 위한 항로 안내방법, 10-2019-0031604)</span>
+                                            2019. 03<br />
+                                            특허등록
+                                            <span>(선박의 효율운항을 위한 항로 안내방법, 10-2031151호)</span>
+                                            2019. 10
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <b>2020S</b>
+                                        <p>
+                                            2020. 03 연구개발전담부서인증 (KOITA)<br />
+                                            2020. 07 Startup Innovation Top 11 선정 (KITA, KR)<br />
+                                            2020. 09 글로벌 피칭대회 Grand Finalist Top 8 선정<br />
+                                            <span>(Pier 71, 2020 Smartport Challenge, SG)</span>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <b>2021S</b>
+                                        <p>
+                                            특허출원 2021. 08<br />
+                                            <span> (COURSE GUIDANCE METHOD FOR EFFICIENT SAILING OF SHIP, </span><br />
+                                            <span>PCT/KR2020/001144, US)</span>
+                                            <br />
+                                            논문 등재<span>(MDPI, Appl. Sci. 2021, 11, 11514)</span> 2021. 11<br />
+                                            디지털뉴딜 우수성과 창출기업(KCA) 2021. 11<br />
+                                            K-스타트업 대상
+                                            <span>(2021대한민국기업대상, 21-06676호)</span> 2021. 12<br />
+                                            과기부 장관상 수상<span>(NIPA, 21-06676호)</span> 2021. 12
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <b>2022S</b>
+                                        <p>
+                                            2022. 03 기업부설연구소 인증
+                                            <span>(KOITA, 2022111562호)</span><br />
+                                            2022. 12 Innovation Makers 1등 수상(KOTRA)
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <b>2023S</b>
+                                        <p>
+                                            디자인특허등록<span>(특허청, 30-1201246호)</span> 2023. 01<br />
+                                            이노비즈 인증
+                                            <span>(중기부, 230102-01003호)</span> 2023. 06<br />
+                                            산자부 장관상 수상
+                                            <span>(무역의 날, 142411호)</span> 2023. 12
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </main>
             <!-- main end -->
             <footer id="footer"></footer>
         </div>
 
-        <script src="./js/common.js"></script>
-        <script type="module" src="./js/company.js"></script>
+        <script src="js/common.js"></script>
+        <script type="module" src="js/sub.js"></script>
     </body>
 </html>

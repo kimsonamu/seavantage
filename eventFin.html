@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>이벤트</title>
+        <link rel="shortcut icon" href="images/common/favicon.ico" />
+        <link rel="stylesheet" href="css/reset.css" />
+        <link rel="stylesheet" href="css/sublayout.css" />
+        <link rel="stylesheet" href="css/common.css" />
+        <link rel="stylesheet" href="css/sub.css" />
+        <link rel="stylesheet" href="css/ani.css" />
+        <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css" />
+    </head>
+    <body>
+        <p id="skipNav" class="blind"><a href="#content">본문 바로가기</a></p>
+        <div id="wrap">
+            <header id="header">
+                <div class="type black"></div>
+            </header>
+
+            <section id="subVisual">
+                <div class="inner">
+                    <span>
+                        <a href="index.html">HOME</a><i class="bx bx-chevron-right"></i> <a href="">홍보센터</a><i class="bx bx-chevron-right"></i>
+                        <a href="eventOn.html">이벤트</a>
+                    </span>
+                    <div class="title">
+                        <h2>이벤트</h2>
+                        <p>행사 및 이벤트 소식을 확인하세요.</p>
+                    </div>
+                </div>
+            </section>
+
+            <main id="container" class="page event mb150">
+                <section id="content">
+                    <div class="inner">
+                        <p class="ev-bar">
+                            <span data-on="ongoing"><a href="eventOn.html">진행중인 이벤트</a></span>
+                            <span class="on" data-on="finished">종료된 이벤트</span>
+                        </p>
+                        <div class="event-card-view">
+                            <p>
+                                이벤트가 종료되었습니다.<br />
+                                종료된 이벤트는 상세 내용을 제공하지 않습니다.
+                            </p>
+                            <ul>
+                                <!-- <li class="act">
+                                    <b>웨비나</b>
+                                    <p class="title">씨벤티지 공급망 가시화 참여 이벤트</p>
+                                    <p class="sub-title">공급망 가시화 플랫폼이 필요한 이유!</p>
+                                    <span class="date">2023.06.08</span>
+                                    <p class="popup-more"><i class="bx bx-right-arrow-alt"></i></p>
+                                </li>
+                                <li>
+                                    <b>웨비나</b>
+                                    <p class="title">물류 플랫폼 웨비나 참여 이벤트</p>
+                                    <p class="sub-title">공급망 가시화 플랫폼이 필요한 이유!</p>
+                                    <span class="date">2023.06.08</span>
+                                    <p class="popup-more"><i class="bx bx-right-arrow-alt"></i></p>
+                                </li>
+                                <li>
+                                    <b>웨비나</b>
+                                    <p class="title">물류 플랫폼 웨비나 참여 이벤트</p>
+                                    <p class="sub-title">공급망 가시화 플랫폼이 필요한 이유!</p>
+                                    <span class="date">2023.06.08</span>
+                                    <p class="popup-more"><i class="bx bx-right-arrow-alt"></i></p>
+                                </li>
+                                <li>
+                                    <b>웨비나</b>
+                                    <p class="title">물류 플랫폼 웨비나 참여 이벤트</p>
+                                    <p class="sub-title">공급망 가시화 플랫폼이 필요한 이유!</p>
+                                    <span class="date">2023.06.08</span>
+                                    <p class="popup-more"><i class="bx bx-right-arrow-alt"></i></p>
+                                </li>
+                                <li>
+                                    <b>웨비나</b>
+                                    <p class="title">물류 플랫폼 웨비나 참여 이벤트</p>
+                                    <p class="sub-title">공급망 가시화 플랫폼이 필요한 이유!</p>
+                                    <span class="date">2023.06.08</span>
+                                    <p class="popup-more"><i class="bx bx-right-arrow-alt"></i></p>
+                                </li>
+                                <li>
+                                    <b>웨비나</b>
+                                    <p class="title">물류 플랫폼 웨비나 참여 이벤트</p>
+                                    <p class="sub-title">공급망 가시화 플랫폼이 필요한 이유!</p>
+                                    <span class="date">2023.06.08</span>
+                                    <p class="popup-more"><i class="bx bx-right-arrow-alt"></i></p>
+                                </li> -->
+                            </ul>
+                            <p class="see-more">더보기<img src="images/sublayout/arrow-bottom-black.png" alt="" /></p>
+                        </div>
+
+                        <!-- 모달창 테스트 -->
+                        <div class="ev-modal">
+                            <div class="modal-con">
+                                <section class="top-timer" id="modal">
+                                    <p>
+                                        이벤트 마감까지
+                                        <!-- <span
+                                            >D-
+                                            <em class="days">2 / </em>
+                                            <em class="hours">32 : </em>
+                                            <em class="minutes">12 : </em>
+                                            <em class="seconds">17s</em>
+                                        </span> -->
+                                        남았어요!
+                                    </p>
+                                </section>
+                                <div class="inner">
+                                    <div class="ev-content">
+                                        <em>
+                                            <img src="" alt="이벤트 대표이미지" />
+                                        </em>
+                                        <h2>
+                                            참석만하면<br />
+                                            <b class="highlight">씨벤티지 솔류션 무료체험 30일!</b>
+                                        </h2>
+                                        <strong>한국국제물류협회 지원사업 소개</strong>
+                                        <ul class="info">
+                                            <li>일시 : 4월 21일 14:00 - 14:30</li>
+                                            <li>장소 : 온라인 진행</li>
+                                        </ul>
+                                        <span>웨비나에 참석하신 모든 분들께 30일 무료체험 혜택을 드립니다. <br />아래 버튼을 통해 무료체험을 신청해주세요.</span>
+
+                                        <p><button>신청하기</button></p>
+                                        <div class="notice">
+                                            <p>꼭 읽어주세요.</p>
+                                            <ul>
+                                                <li>웨비나에 참석하신 모든 분들께 30일 무료체험 혜택을 드립니다.</li>
+                                                <li>설문 조사 양힉 하단에서 무료체험을 신청해주세요.</li>
+                                                <li>참가 신청 시 입력한 개인정보는 행사 알림 목적 및 이벤트 상품 발송 안내에 활용됩니다.</li>
+                                                <li>이벤트 관련 문의는 씨벤티지 문의폼으로 남겨주시기 바랍니다.</li>
+                                            </ul>
+                                            <p class="close"><i class="xi-close-thin"></i></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+            <!-- main end -->
+            <footer id="footer"></footer>
+        </div>
+        <script src="js/common.js"></script>
+        <script type="module" src="js/sub.js"></script>
+    </body>
+</html>

@@ -1,3 +1,53 @@
+/* about */
+@keyframes animate {
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(20px);
+    }
+}
+/* about visual text */
+@keyframes abt-vi-Txt1 {
+    0% {
+        transform: translateY(60%);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+/* about content effect */
+@keyframes aniY {
+    0% {
+        transform: translateY(45px);
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+@keyframes abt-vi-Txt2 {
+    0% {
+        transform: translateY(60%);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
 /* main */
 @keyframes scrollIcon {
     0% {
@@ -91,7 +141,57 @@
         margin-left: 30px;
     }
 }
-
+/* recruit circle */
+@keyframes cirCularTxt {
+    0% {
+        left: 0;
+    }
+    40% {
+        opacity: 0;
+    }
+    70% {
+        opacity: 0;
+    }
+    100% {
+        left: 40%;
+        opacity: 1;
+    }
+}
+@keyframes cirCular {
+    0% {
+        width: 400px;
+    }
+    100% {
+        width: 1200px;
+    }
+}
+@keyframes cirCularIn {
+    0% {
+        left: 50%;
+    }
+    100% {
+        left: 200px;
+    }
+}
+@keyframes irInfo {
+    0% {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes pluseEfec {
+    100% {
+        scale: 2;
+        opacity: 0;
+    }
+    80% {
+        opacity: 0;
+    }
+}
 /* price bg-color */
 @keyframes bgRotate {
     0% {

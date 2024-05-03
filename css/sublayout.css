@@ -1,26 +1,4 @@
 /* 컨텐츠 내 공통 여백 - 갖다 쓰기 */
-:root {
-    --primary-color: rgba(27, 197, 197, 1);
-    --primary-color-90: rgba(27, 197, 197, 0.9);
-    --primary-color-80: rgba(27, 197, 197, 0.8);
-    --primary-color-70: rgba(27, 197, 197, 0.7);
-    --primary-color-60: rgba(27, 197, 197, 0.6);
-    --primary-color-50: rgba(27, 197, 197, 0.5);
-    --primary-color-40: rgba(27, 197, 197, 0.4);
-    --primary-color-30: rgba(27, 197, 197, 0.3);
-    --primary-color-20: rgba(27, 197, 197, 0.2);
-    --primary-color-10: rgba(27, 197, 197, 0.1);
-    --gray-scale-50: #eaeaea;
-    --gray-scale-100: #bfbfbf;
-    --gray-scale-200: #a0a0a0;
-    --gray-scale-300: #747474;
-    --gray-scale-400: #595959;
-    --gray-scale-500: #303030;
-    --gray-scale-600: #2c2c2c;
-    --gray-scale-700: #222222;
-    --gray-scale-800: #1a1a1a;
-    --gray-scale-900: #141414;
-}
 .mt100 {
     margin-top: 100px;
 }
@@ -32,6 +10,18 @@
 }
 .mb150 {
     margin-bottom: 150px;
+}
+.pt100 {
+    padding-top: 100px;
+}
+.pb100 {
+    padding-bottom: 100px;
+}
+.pt150 {
+    padding-top: 150px;
+}
+.pb150 {
+    padding-bottom: 150px;
 }
 
 /* 서브 비주얼 공통 */
@@ -46,22 +36,31 @@
     background-repeat: no-repeat;
     background-position: 0 0;
     background-size: cover;
-    background-image: url(../images/content/test.jpg);
     color: #fff;
     margin-bottom: 150px;
 }
-#subVisual h2 {
+
+#subVisual .title {
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+#subVisual .title h2 {
     font-size: 60px;
     font-weight: 700;
-    margin-bottom: 20px;
-    padding-top: 100px;
+    margin: 20px 0;
+    opacity: 0;
+    animation: BottomTOTop 1.5s forwards;
 }
-#subVisual p {
+#subVisual .title p {
     font-size: 24px;
-    padding-bottom: 100px;
+    margin: 20px 0;
+    opacity: 0;
+    animation: BottomTOTop 1.5s forwards;
+    animation-delay: 0.2s;
 }
 #subVisual span {
     float: right;
+    z-index: 1000;
 }
 #subVisual span a {
     font-size: 16px;

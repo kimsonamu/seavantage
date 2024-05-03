@@ -113,6 +113,7 @@
     bottom: 70px;
     opacity: 0.8;
     letter-spacing: 1px;
+    z-index: 100;
 }
 #visual .scroll-icon {
     float: right;
@@ -172,17 +173,11 @@
 .main .main-area1 {
 }
 .main .main-area1 .inner {
+    padding-top: 100px;
     display: flex;
-    /* css 수정 */
     justify-content: space-between;
-    /* align-items: start; */
 }
 .main .main-area1 .sol-left-list {
-    /* display: flex; */
-    /* flex-direction: column;
-    justify-content: space-between;
-    align-items: end; */
-    /* align-items: self-end; */
     height: 700px;
     width: 600px;
     position: relative;
@@ -192,8 +187,6 @@
     right: 0;
     bottom: 0;
     color: #fff;
-    /* margin-top: 210px;
-    float: right; */
 }
 .main .main-area1 .sec-title {
     display: none;
@@ -231,12 +224,12 @@
 .main .main-area2 {
     box-sizing: border-box;
     height: 1080px;
+    padding: 400px 0;
 }
 .main .main-area2 .inner {
     width: 100%;
 }
 .main .main-area2 .sec-title {
-    margin-top: 150px;
     text-align: center;
 }
 .main .main-area2 .logos-width {
@@ -267,6 +260,7 @@
 .main .main-area3 {
     height: 1080px;
     position: relative;
+    padding-top: 200px;
 }
 .main .main-area3::before {
     content: '';
@@ -295,13 +289,15 @@
     gap: 50px;
 }
 .main .main-area3 figure .count-container {
-    display: flex;
+    width: 500px;
     gap: 50px;
+    display: flex;
     flex-wrap: wrap;
     align-self: start;
     transform: translateY(120px);
 }
 .main .main-area3 figure .count-container li {
+    width: 200px;
 }
 .main .main-area3 figure .count-container li span {
     font-size: 24px;
@@ -315,8 +311,8 @@
 }
 .main .main-area3 figure .roll {
     width: 1058px;
-    float: right;
-    position: relative;
+    position: absolute;
+    right: 0;
 }
 .main .main-area3 figure .roll::before {
     content: '';
@@ -325,7 +321,6 @@
     width: 100%;
     height: 60px;
     position: absolute;
-    left: 0;
     bottom: -140px;
     border-radius: 100%;
 }
@@ -355,7 +350,7 @@
     z-index: 10;
 }
 .main .main-area3 figure .roll .rolling-container .after {
-    left: 490px;
+    left: 540px;
     filter: grayscale(1) brightness(0.3);
 }
 .main .main-area3 figure .roll .rolling-container .img-txt-more {
@@ -369,7 +364,7 @@
     align-items: center;
     opacity: 0;
     animation: BottomTOTop 3s forwards 0.5s;
-    padding-left: 110px;
+    padding-left: 130px;
 }
 
 .main .main-area3 figure .roll .img-txt-more em {
@@ -524,22 +519,11 @@
     position: relative;
     font-weight: 700;
 }
-/* .main .main-area4 .menu-paing a.on::after {
-    content: '';
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background: var(--primary-color);
-    position: absolute;
-    right: -10px;
-    top: -5px;
-    z-index: -1;
-} */
 /* area5 */
 .main .main-area5 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 1080px;
+    position: relative;
+    box-sizing: border-box;
 }
 .main .main-area5 .inner {
     display: flex;
@@ -577,43 +561,45 @@
     transform: translateY(-100%);
 }
 /* band banner */
-.main .band-banner {
+.main .main-area5 .band-banner {
     width: 100%;
-    margin: auto;
     background: url(../images/main/band-bg.jpg);
     background-position: 0 0;
     background-repeat: no-repeat;
     background-size: cover;
     box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    bottom: 0;
 }
-.main .band-banner .inner {
+.main .main-area5 .band-banner .inner {
     width: 1600px;
     height: 200px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.main .band-banner .text {
+.main .main-area5 .band-banner .text {
 }
-.main .band-banner .text b {
+.main .main-area5 .band-banner .text b {
     font-size: 30px;
     font-weight: 300;
     color: #fff;
 }
-.main .band-banner .text b em {
+.main .main-area5 .band-banner .text b em {
     font-weight: 600;
     color: var(--primary-color);
 }
-.main .band-banner .text span {
+.main .main-area5 .band-banner .text span {
     display: block;
     font-weight: 300;
     font-size: 20px;
     color: #fff;
 }
-.main .band-banner p {
+.main .main-area5 .band-banner p {
     text-align: center;
 }
-.main .band-banner p a {
+.main .main-area5 .band-banner p a {
     line-height: 60px;
     width: 160px;
     height: 60px;
@@ -626,7 +612,7 @@
     background: rgba(0, 0, 0, 0.3);
     transition: 0.3s;
 }
-.main .band-banner p a:hover {
+.main .main-area5 .band-banner p a:hover {
     background: var(--primary-color);
     outline: none;
 }

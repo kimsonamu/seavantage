@@ -1,5 +1,355 @@
-import { blogPost, eventPost, guidePost } from './data.js';
+import { blogPost, eventPost, guidePost, terms, channels, solutions, languages, industryTypes, inquirys, products, strNewsDataURL } from './data.js';
+/* --------------------------------------------------------------------
+create bt kim-seo-jin
+at 2024-04-30 / about
+--------------------------------------------------------------------*/
+// 기업소개페이지
+const aboutFn = () => {
+    let $aniscroll1 = getAll('.con1 .ani-scroll');
+    let $aniscroll3 = getAll('.con3 .ani-scroll');
+    let $con1 = get('.con1');
+    let $con2 = get('.con2');
+    let $con3 = get('.con3');
 
+    let $reBtn = get('.re-btn');
+    let $awBtn = get('.aw-btn');
+    let $record = get('.record');
+    let $awards = get('.awards');
+
+    const aniOpt = [{ opacity: [0, 1] }, { duration: 300 }];
+    $awBtn.addEventListener('click', (e) => {
+        $record.classList.add('off');
+        $reBtn.classList.remove('on');
+        $awBtn.classList.add('on');
+        $awards.classList.remove('off');
+        $awards.animate(...aniOpt);
+    });
+
+    $reBtn.addEventListener('click', (e) => {
+        $awBtn.classList.remove('on');
+        $awards.classList.add('off');
+        $reBtn.classList.add('on');
+        $record.classList.remove('off');
+        $record.animate(...aniOpt);
+    });
+    function fObsInitAbout(func, obj) {
+        const opt = { root: null, rooMargin: '0px 0px 0px 0px', threshold: 0.5, delay: 10 };
+        const obser = new IntersectionObserver((entries, observer) => {
+            if (entries[0].intersectionRatio <= 0) return;
+            if (entries[0].isIntersecting) {
+                func();
+                observer.unobserve(obj);
+            }
+        }, opt);
+        return obser;
+    }
+    function fAniObject(ele) {
+        ele.forEach((item, idx) => {
+            setTimeout(() => {
+                item.classList.add('aniActive');
+            }, idx * 80);
+        });
+    }
+    function fCountNum() {
+        const emCountNum = document.querySelectorAll('.about .con2 .list li strong span');
+        const arrCountNum = document.querySelectorAll('[data-num]');
+        emCountNum.forEach((item, idx) => {
+            const num = Number(arrCountNum[idx].dataset.num),
+                speed = 250;
+            let currnt = 0,
+                step = 0;
+            step = Math.floor(num / speed);
+            step = step < 2 ? speed / 1000 : step;
+            const fCountUp = () => {
+                if (currnt <= num) {
+                    currnt += step;
+                    item.textContent = new Intl.NumberFormat().format(currnt.toFixed(0));
+                    setTimeout(fCountUp, num / 1000);
+                } else item.textContent = new Intl.NumberFormat().format(num);
+            };
+            fCountUp();
+        });
+    }
+    fObsInitAbout(() => {
+        fAniObject($aniscroll1);
+    }, $con1).observe($con1);
+    fObsInitAbout(() => {
+        fAniObject($aniscroll3);
+    }, $con3).observe($con3);
+    fObsInitAbout(() => {
+        fCountNum();
+    }, $con2).observe($con2);
+};
+/* --------------------------------------------------------------------
+create by shin-jun-hyeok
+at 2024-05-01 / (솔루션 공통 , Cargo-insight , Iot cargo monitoring)
+--------------------------------------------------------------------*/
+// 솔루션 공통
+const tab = () => {
+    const $tabMenus = getAll('.soln-tab .tab-menu li');
+    const $tabLists = getAll('.soln-tab .tab-list li');
+
+    $tabMenus.forEach((tab, idx) => {
+        tab.addEventListener('click', (e) => {
+            $tabMenus.forEach((tabs, idx) => {
+                tabs.classList.remove('on');
+                $tabLists[idx].style.opacity = 0;
+            });
+            e.currentTarget.classList.add('on');
+            $tabLists[idx].style.opacity = 1;
+        });
+    });
+};
+const scrollCommon = () => {
+    let $video = get('.soln-vid .video video');
+    let $txtMore = get('.soln-band .img-txt-more');
+    window.addEventListener('scroll', (e) => {
+        if (window.scrollY >= 1800) {
+            $video.play();
+        }
+    });
+
+    let observer = new IntersectionObserver(
+        (entries, observer) => {
+            entries.forEach((entry) => {
+                let txtMo = entry.target;
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        txtMo.classList.add('on');
+                    }, 100);
+                } else {
+                    txtMo.classList.remove('on');
+                }
+            });
+        },
+        {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5,
+            // 50%이상 타겟이 화면에 나타나면 클래스를 추가
+        }
+    );
+
+    observer.observe($txtMore);
+};
+const solCommon = () => {
+    tab();
+    scrollCommon();
+};
+// cargo.html - 롤링배너
+const cargoBanner = () => {
+    const $bannerLi = getAll('.cargo .cargo-area1 ul li ');
+    const $paging = getAll('.cargo .cargo-area1 .paging a');
+    let bannerWidth = $bannerLi[0].offsetWidth;
+    let cnt = 0,
+        old = 0,
+        length = $bannerLi.length,
+        timer = null,
+        interval = 5000;
+
+    const slide = () => {
+        $bannerLi[cnt].style.transition = '0s';
+        $bannerLi[cnt].style.left = `${bannerWidth}px`;
+        $bannerLi[cnt].style.zIndex = '10';
+
+        setTimeout(() => {
+            $bannerLi[cnt].style.transition = '0.4s';
+            $bannerLi[cnt].style.left = '0px';
+            $paging[cnt].classList.add('on');
+            $bannerLi[old].style.left = `${bannerWidth * -1}px`;
+            $bannerLi[old].style.zIndex = '1';
+            $paging[old].classList.remove('on');
+            old = cnt;
+        }, 50);
+    };
+    const time = () => {
+        cnt++;
+        if (cnt > length - 1) {
+            cnt = 0;
+        }
+        slide();
+    };
+    timer = setInterval(time, interval);
+    $paging.forEach((page, idx) => {
+        page.addEventListener('click', (e) => {
+            cnt = idx;
+            slide();
+            clearInterval(timer);
+            timer = setInterval(time, interval);
+        });
+    });
+};
+// shit - area1 스크롤 이벤트
+const shipBanner = () => {
+    const $bns = getAll('.ship .ship-area1 .listing-banner li');
+    window.addEventListener('scroll', (e) => {
+        if (window.scrollY >= 500) {
+            $bns.forEach((bns) => {
+                bns.classList.add('on');
+            });
+        }
+    });
+};
+// iot - 버튼클릭 배너
+const iotBanner = () => {
+    const $btns = getAll('.iot .iot-area5 .slide-banner .btn a');
+    const $banner = get('.iot .iot-area5 ul');
+    const $bannerLi = getAll('.iot .iot-area5 ul li');
+    let first,
+        last,
+        current = 0,
+        len = $bannerLi.length,
+        liwidth = $bannerLi[0].offsetWidth;
+
+    const opacity = () => {
+        $bannerLi.forEach((li) => {
+            li.classList.remove('on');
+        });
+        $bannerLi[current].classList.add('on');
+    };
+
+    last = document.querySelector('.iot .iot-area5 ul li:last-child');
+    $banner.prepend(last);
+    $banner.style.transition = 'none';
+    $banner.style.marginLeft = `-${liwidth}px`;
+
+    $btns[0].addEventListener('click', (e) => {
+        current++;
+        if (current > len - 1) {
+            current = 0;
+        }
+        $banner.style.transition = 'margin-left 0.4s ease';
+        $banner.style.marginLeft = parseInt(getComputedStyle($banner).marginLeft) - liwidth + 'px';
+        setTimeout(() => {
+            first = document.querySelector('.iot .iot-area5 li:first-child');
+            $banner.append(first);
+            $banner.style.transition = 'none';
+            $banner.style.marginLeft = `-${liwidth}px`;
+            opacity();
+        }, 10);
+    });
+
+    $btns[1].addEventListener('click', (e) => {
+        current--;
+        if (current < 0) {
+            current = len - 1;
+        }
+        $banner.style.transition = 'margin-left 0.4s ease';
+        $banner.style.marginLeft = parseInt(getComputedStyle($banner).marginLeft) + liwidth + 'px';
+        setTimeout(() => {
+            last = document.querySelector('.iot .iot-area5 ul li:last-child');
+            $banner.prepend(last);
+            $banner.style.transition = 'none';
+            $banner.style.marginLeft = `-${liwidth}px`;
+            opacity();
+        }, 10);
+    });
+};
+// iot.html - 스크롤 이벤트
+const iotScroll = () => {
+    let $images1 = get('.iot .iot-area1 .speech');
+    let $images2 = get('.iot .iot-area4 ul');
+    let $videoArea = get('.iot .iot-area6 .video');
+    let $videos = getAll('.iot .iot-area6 .video ul li');
+    let timer;
+    window.addEventListener('scroll', (e) => {
+        if (window.scrollY >= 720) {
+            $images1.classList.add('on');
+        }
+    });
+
+    window.addEventListener('scroll', (e) => {
+        if (window.scrollY >= 4047) {
+            $images2.classList.add('on');
+        }
+    });
+    $videoArea.addEventListener('wheel', (e) => {
+        document.body.style.overflow = 'hidden';
+        if (!timer) {
+            timer = setTimeout(() => {
+                timer = null;
+                if (e.deltaY > 0) {
+                    $videos.forEach((video) => {
+                        video.classList.toggle('on');
+                        $videoArea.animate({ opacity: [0, 1] }, 400);
+                    });
+                } else {
+                    $videos.forEach((video) => {
+                        video.classList.toggle('on');
+                        $videoArea.animate({ opacity: [0, 1] }, 400);
+                    });
+                }
+            }, 1000);
+        }
+    });
+    window.addEventListener('click', (e) => {
+        document.body.style.overflow = 'unset';
+    });
+};
+/* --------------------------------------------------------------------
+    create by kimsona
+    at 2024-04-25
+--------------------------------------------------------------------*/
+function fNewsPageInit() {
+    const ulNewsList = document.querySelector('.news .newslist > ul');
+    const divNewsCon = document.querySelector('.news .newscont');
+    const arrNewsList = strNewsDataURL;
+    const arrQuerySting = location.search.replace('?', '').split('=');
+
+    let nLastNewsClick = 0,
+        nCurNews = arrQuerySting[0] === 'num' && !Number.isNaN(arrQuerySting[1].trim()) ? Number(arrQuerySting[1].trim()) - 1 : 0;
+    const fNewsListInit = () => {
+        ulNewsList.innerHTML = '';
+        divNewsCon.innerHTML = '';
+        for (let i = 0; i < arrNewsList.length; i++) {
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.setAttribute('href', '#');
+            a.addEventListener('click', (e) => fViewNews(i, e));
+            const img = document.createElement('img');
+            img.setAttribute('src', arrNewsList[i].thumb);
+            img.setAttribute('alt', arrNewsList[i].title);
+            const p = document.createElement('p');
+            p.innerHTML = arrNewsList[i].title;
+            const span = document.createElement('span');
+            span.textContent = arrNewsList[i].date;
+            const icon = document.createElement('i');
+            icon.setAttribute('data-newsindex', arrNewsList[i].index);
+            icon.classList.add('dropdownbtn');
+            icon.classList.add('xi-angle-down');
+            a.append(img, p, span, icon);
+            li.append(a);
+            ulNewsList.append(li);
+        }
+        fViewNews(nCurNews);
+    };
+    function fViewNews(num, ev = null) {
+        if (ev !== null) {
+            ev.preventDefault();
+            window.scroll({ top: document.getElementById('newsContent').offsetTop + 500, behavior: 'smooth' });
+        }
+        nCurNews = num;
+        const icon = ulNewsList.querySelectorAll('i[data-newsindex]');
+        ulNewsList.children[nLastNewsClick].classList.remove('on');
+        icon[nLastNewsClick].classList.remove('on');
+        icon[nLastNewsClick].classList.replace('xi-angle-up', 'xi-angle-down');
+        icon[nCurNews].classList.add('on');
+        icon[nCurNews].classList.replace('xi-angle-down', 'xi-angle-up');
+        ulNewsList.children[nCurNews].classList.add('on');
+        divNewsCon.innerHTML = '';
+        const strong = document.createElement('strong');
+        strong.textContent = arrNewsList[num].title;
+        const em = document.createElement('em');
+        em.textContent = arrNewsList[num].date;
+        const div = document.createElement('div');
+        div.innerHTML = arrNewsList[num].content;
+        divNewsCon.append(strong, em, div);
+        nLastNewsClick = nCurNews;
+    }
+    (() => {
+        fNewsListInit();
+    })();
+}
 /* --------------------------------------------------------------------
 create bt kang-young-hyun
 at 2024-04-22 / blogList, blogGoToPage
@@ -30,7 +380,6 @@ const blogList = () => {
         const $sumDummy2 = get('.blog .right-flex-text b:nth-of-type(2)');
         const $blogMore = get('.blog .right-flex-text p.blog-more a');
         let blogCur = firstPost;
-        // console.log(blogCur);
 
         const sumKeyframes = [
             { transform: 'translateY(100px)', opacity: 0 },
@@ -43,8 +392,8 @@ const blogList = () => {
         };
 
         conText(blogCur);
-        // window.localStorage.setItem(`num`, blogCur);
-        // $blogLis[0].classList.add('on');
+        window.localStorage.setItem(`num`, blogCur);
+        $blogLis[0].classList.add('on');
 
         $blogLis.forEach((li) => {
             li.addEventListener('click', (e) => {
@@ -67,7 +416,7 @@ const blogList = () => {
             $sumQues.innerHTML = `${conNum.ques}`;
             $sumDummy1.innerHTML = `${conNum.textDummy1}`;
             $sumDummy2.innerHTML = `${conNum.textDummy2}`;
-            $blogMore.href = conNum.url;
+            $blogMore.href = 'blogPost.html';
             window.localStorage.setItem(`num`, num);
         }
     };
@@ -84,8 +433,8 @@ const blogList = () => {
                 default:
                     currentPage = Number(e.currentTarget.textContent);
             }
-            // console.log(currentPage);
-            // getData();
+
+            getData();
         };
         $blogPaging.innerHTML = '';
         for (let i = 0; i < pageNumber; i++) {
@@ -110,30 +459,26 @@ const blogList = () => {
             paging.addEventListener('click', pageClick);
         });
     };
-    // const makeList = () => {
-    //     // 좌측 게시판 리스팅
+    const makeList = () => {
+        // 좌측 게시판 리스팅
+        $listing.innerHTML = '';
 
-    // };
+        for (let i = firstPost; i < lastPost; i++) {
+            const li = document.createElement('li');
+            li.textContent = posts[i].title;
+            li.setAttribute('data-id', posts[i].id);
+            $listing.appendChild(li);
+        }
+    };
     const getData = () => {
         posts = blogPost;
         totalPage = blogPost.length;
         postMod = totalPage % postPerPage;
         pageNumber = Math.ceil(totalPage / postPerPage);
-        const curPAgeNumt = window.localStorage.getItem('num');
-        // currentPage = curPAgeNumt === '' ? currentPage : Math.floor(totalPage / postPerPage);
-        firstPost = currentPage + 1 * postPerPage;
-        window.localStorage.clear();
+        firstPost = (currentPage - 1) * postPerPage;
         lastPost = currentPage == pageNumber && postMod !== 0 ? firstPost + postMod : firstPost + postPerPage;
-        console.log(firstPost, currentPage);
 
-        $listing.innerHTML = '';
-
-        for (let i = firstPost; i < lastPost; i++) {
-            const li = document.createElement('li');
-            li.textContent = firstPost + i + posts[i].title;
-            li.setAttribute('data-id', posts[i].id);
-            $listing.appendChild(li);
-        }
+        makeList(currentPage);
         makePaging();
         blogCondense();
     };
@@ -147,39 +492,46 @@ const blogGoToPage = () => {
     const $blogPrevTitle = get('.blog-post .move-post .prev .title');
     const $blogNext = get('.blog-post .move-post .next');
     const $blogNextTitle = get('.blog-post .move-post .next .title');
+    const $postDate = get('.blog-post article .date');
+    const $postTitle = get('.blog-post article .title');
+    const $postContent = get('.blog-post article div');
     let cnt = Number(localStorage.getItem('num'));
     let old = 0;
 
     const btnPN = () => {
         if (cnt == 0) {
-            $blogPrev.style.visibility = 'hidden';
-            $blogNextTitle.innerHTML = `${blogPost[cnt + 1].id}. ${blogPost[cnt + 1].title}`;
+            $blogPrevTitle.textContent = `이전글이 없습니다`;
+            $blogNextTitle.textContent = `${blogPost[cnt + 1].id}. ${blogPost[cnt + 1].title}`;
         } else if (cnt == blogPost.length - 1) {
-            $blogPrevTitle.innerHTML = `${blogPost[cnt - 1].id}. ${blogPost[cnt - 1].title}`;
-            $blogNext.style.visibility = 'hidden';
+            $blogPrevTitle.textContent = `${blogPost[cnt - 1].id}. ${blogPost[cnt - 1].title}`;
+            $blogNextTitle.textContent = `다음글이 없습니다`;
         } else {
             $blogPrevTitle.innerHTML = `${blogPost[cnt - 1].id}. ${blogPost[cnt - 1].title}`;
             $blogNextTitle.innerHTML = `${blogPost[cnt + 1].id}. ${blogPost[cnt + 1].title}`;
         }
     };
     const numbering = (cnt) => {
-        window.location = `../${blogPost[cnt].url}`;
+        if (cnt < 0 || cnt > blogPost.length - 1) return;
+        scrollTo(0, 0);
         window.localStorage.setItem(`num`, cnt);
+        $postDate.textContent = blogPost[cnt].date;
+        $postTitle.textContent = blogPost[cnt].title;
+        $postContent.innerHTML = blogPost[cnt].html;
         old = cnt;
+        btnPN(cnt);
     };
+    numbering(cnt);
     $blogPrev.addEventListener('click', (e) => {
-        cnt--;
+        cnt = cnt <= -1 ? 0 : --cnt;
+
         numbering(cnt);
     });
     $blogNext.addEventListener('click', (e) => {
-        cnt++;
+        cnt >= blogPost.length ? blogPost.length : ++cnt;
         numbering(cnt);
     });
 
     btnPN();
-    $backList.addEventListener('click', (e) => {
-        history.back();
-    });
 };
 
 /* --------------------------------------------------------------------
@@ -223,24 +575,21 @@ const eventListOn = () => {
     $cardViewUl.innerHTML = '';
 
     const dDay = (keys) => {
-        console.log(keys.date);
         const dday = new Date(keys.year, keys.month, keys.date);
         const gapTime = dday.getTime() - today.getTime();
-
         const days = Math.floor(gapTime / (1000 * 60 * 60 * 24)) - 30;
         const hours = Math.floor(gapTime / (1000 * 60 * 60)) % 24;
         const minutes = Math.floor(gapTime / (1000 * 60)) % 60;
         const seconds = Math.floor(gapTime / 1000) % 60;
 
-        $timer.innerHTML = `이벤트 마감까지 <span>D-${days}일 ${hours}시간 ${minutes}분</span>남았어요!`;
-        // $timer.innerHTML = `이벤트 마감까지 <span>D-${days}일 ${hours}시간 ${minutes}분 ${seconds}초</span>남았어요!`;
-        // num 값을 1초 단위로 받지 못해서 초에서 오류남.
+        $timer.innerHTML = `이벤트 마감까지 <span>D-${days}일</span>남았어요!`;
+        // $timer.innerHTML = `이벤트 마감까지 <span>D-${days}일 ${hours}시간 ${minutes}분</span>남았어요!`;
     };
     const moInner = (id) => {
         // 모달 컨텐츠
 
         let keys = data[id];
-        $evImg.setAttribute('src', `${keys.bgUrl}`);
+        $evImg.setAttribute('src', `${keys.moUrl}`);
         $evImg.setAttribute('alt', `${keys.subTitle}`);
         $title.innerHTML = `${keys.title}`;
         $subTitle.innerHTML = `${keys.subTitle}`;
@@ -275,7 +624,7 @@ const eventListOn = () => {
             });
             card.addEventListener('mouseleave', (e) => {
                 $cards.forEach((items) => {
-                    items.classList.remove('act');
+                    // items.classList.remove('act');
                 });
             });
         });
@@ -295,7 +644,6 @@ const eventListOn = () => {
             const p3 = document.createElement('p');
             li.setAttribute('data-id', cnt);
             li.style.backgroundImage = `url(${data[cnt].bgUrl})`;
-            console.log(getComputedStyle(li).backgroundImage);
             b.textContent = data[cnt].cate;
             p1.innerHTML = data[cnt].title;
             p1.classList.add('title');
@@ -354,7 +702,6 @@ const eventListFin = () => {
 
     let maxCard = 6,
         cnt = 0,
-        current = 0,
         data = finished;
 
     $cardViewUl.innerHTML = '';
@@ -372,6 +719,7 @@ const eventListFin = () => {
             const span = document.createElement('span');
             const p3 = document.createElement('p');
             li.setAttribute('data-id', cnt);
+            li.style.backgroundImage = `url(${data[cnt].bgUrl})`;
             b.textContent = data[cnt].cate;
             p1.innerHTML = data[cnt].title;
             p1.classList.add('title');
@@ -396,7 +744,81 @@ const eventListFin = () => {
         makeCard();
     });
 };
+/* --------------------------------------------------------------------
+    create by kimsona
+    at 2024-04-25
+--------------------------------------------------------------------*/
+function fRecruitPageInit() {
+    const btnsRecruitMore = document.querySelectorAll('.cowork .ir-view .irlist li button');
+    btnsRecruitMore.forEach((item) => {
+        item.addEventListener('click', (e) => {
+            window.open('https://team.seavantage.com/recruit');
+        });
+    });
+}
+/* --------------------------------------------------------------------
+    create by kang-young-hyun
+    at 2024-04-29 / recruit dark mode + recruit ani
+--------------------------------------------------------------------*/
+function fRecruitDark() {
+    const $recruitHeader = get('#header div');
+    const $recruitVis = get('#subVisual');
+    const $recruitMain = get('.cowork');
+    const $recruitCircle = get('.cowork .irdiagram .circular div:nth-of-type(1)');
+    const $irView = get('.cowork .ir-view');
 
+    let tema = true;
+
+    setTimeout(() => {
+        $recruitHeader.classList.remove('black');
+        $recruitHeader.classList.add('white');
+        $recruitVis.classList.add('type-img');
+        $recruitVis.style.transition = `0.4s`;
+        $recruitMain.classList.add('dark');
+        $recruitMain.style.transition = `0.4s`;
+    }, 1000);
+
+    $recruitCircle.addEventListener('click', (e) => {
+        if (tema) {
+            $recruitHeader.classList.remove('white');
+            $recruitHeader.classList.add('black');
+            $recruitVis.classList.remove('type-img');
+            $recruitMain.classList.remove('dark');
+
+            tema = false;
+        } else {
+            $recruitHeader.classList.add('white');
+            $recruitHeader.classList.remove('black');
+            $recruitVis.classList.add('type-img');
+            $recruitMain.classList.add('dark');
+
+            tema = true;
+        }
+    });
+
+    let observer = new IntersectionObserver(
+        (entries, observer) => {
+            entries.forEach((entry) => {
+                let irveiw = entry.target;
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        irveiw.classList.add('on');
+                    }, 500);
+                } else {
+                    irveiw.classList.remove('on');
+                }
+            });
+        },
+        {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5,
+            // 50%이상 타겟이 화면에 나타나면 클래스를 추가
+        }
+    );
+
+    observer.observe($irView);
+}
 /* --------------------------------------------------------------------
 create bt kang-young-hyun
 at 2024-04-22 / guideList
@@ -515,7 +937,9 @@ const guideList = () => {
             } else if (name === '전체') {
                 newList = listAll;
             }
-            posts = newList;
+            posts = newList.sort(function (a, b) {
+                return new Date(b.date) - new Date(a.date);
+            });
 
             getGuide();
 
@@ -536,7 +960,10 @@ const guideList = () => {
 
         let searchList = [];
         searchList = [...guidePost].filter((words) => words.title.toLowerCase().indexOf(word.toLowerCase()) !== -1);
-        posts = searchList;
+        posts = searchList.sort(function (a, b) {
+            return new Date(b.date) - new Date(a.date);
+        });
+
         getGuide();
     };
     $searchBtn.addEventListener('click', (e) => {
@@ -548,8 +975,394 @@ const guideList = () => {
         }
     });
 };
+/* ------------------------------------------------------------------------
+create by shin-jun-hyeok
+at 2024-04-23 /faqPage
+------------------------------------------------------------------------ */
+// faq.html - 아코디언
+const faqPage = () => {
+    const $accordionList = getAll('.faq .accordion li');
+    const $accordionBtn = getAll('.faq .accordion li div span i');
+    $accordionList.forEach((list, idx) => {
+        list.addEventListener('click', (e) => {
+            list.classList.toggle('active');
+            if (list.classList.contains('active')) {
+                $accordionBtn[idx].style.rotate = '-180deg';
+            } else {
+                $accordionBtn[idx].style.rotate = '0deg';
+            }
+        });
+    });
+};
+/* ------------------------------------------------------------------------
+create by shin-jun-hyeok
+at 2024-04-30 /inquirySelect, inquiryAgree, inquiryCheck, inquirySubmit, rolling
+------------------------------------------------------------------------ */
+// inquiry.html - 셀렉트박스 옵션
+const inquirySelect = () => {
+    const $product = get('.inquiry .inquirys .write .input1 #products');
+    const $industryType = get('.inquiry .inquirys .write .input2 #industryTypes');
+    const $inquiry = get('.inquiry .inquirys .write .input2 #inquirys');
+    products.forEach((item) => {
+        let option = document.createElement('option');
+        option.setAttribute('value', item.value);
+        option.innerHTML = item.name;
+        $product.appendChild(option);
+    });
+    industryTypes.forEach((item) => {
+        let option = document.createElement('option');
+        option.setAttribute('value', item.value);
+        option.innerHTML = item.name;
+        $industryType.appendChild(option);
+    });
+    inquirys.forEach((item) => {
+        let option = document.createElement('option');
+        option.setAttribute('value', item.value);
+        option.innerHTML = item.name;
+        $inquiry.appendChild(option);
+    });
+};
+// inquiry.html - 전체동의 체크
+const inquiryAgree = () => {
+    const $personal = get('.inquiry .inquirys .write .agree .chkbox .personalInfo');
+    const $marketing = get('.inquiry .inquirys .write .agree .chkbox .marketing');
+    $personal.innerHTML = terms[0].desc;
+    $marketing.innerHTML = terms[2].desc;
+    const $chks = getAll('.inquiry .inquirys .write .agree .chkbox input[type=checkbox]');
+    const $chk = getAll('.inquiry .inquirys .write .agree .chkbox .chk');
+    let isChecked = true;
+    $chks.forEach((check) => {
+        check.addEventListener('click', (e) => {
+            isChecked = true;
+            if (check.name === 'all') {
+                $chks.forEach((chk1) => {
+                    chk1.checked = all.checked;
+                });
+            }
+            $chk.forEach((chk2) => {
+                isChecked = chk2.checked && isChecked;
+            });
+            all.checked = isChecked;
+        });
+    });
+};
+// inquiry.html - 유효성검사
+const inquiryCheck = () => {
+    const $name = get('.inquiry .inquirys .write .input1 #userName');
+    const $company = get('.inquiry .inquirys .write .input1 #companyName');
+    const $email = get('.inquiry .inquirys .write .input1 #userEmail');
+    const $tel = get('.inquiry .inquirys .write .input2 #phone');
+    const $position = get('.inquiry .inquirys .write .input2 #position');
+    const $select1 = get('.inquiry .inquirys .write .input1 #products');
+    const $select2 = get('.inquiry .inquirys .write .input2 #inquirys');
+    const $chkbox = get('.inquiry .inquirys .write .agree .chkbox em #chk1');
+    if ($name.value === '') {
+        alert('이름을 입력해 주세요.');
+        $name.focus();
+    } else if ($company.value === '') {
+        alert('회사명 또는 단체명을 입력해 주세요.');
+        $company.focus();
+    } else if ($email.value.indexOf('@') === -1 || $email.value.split('@')[1].indexOf('.') === -1) {
+        alert('이메일 형식이 올바르지 않습니다.');
+        $email.focus();
+    } else if ($tel.value === '') {
+        alert('전화번호를 입력해 주세요.');
+        $tel.focus();
+    } else if ($position.value === '') {
+        alert('직책을 입력해 주세요.');
+        $position.focus();
+    } else if ($select1.value === '') {
+        alert('관심제품을 선택해 주세요.');
+        $select1.focus();
+    } else if ($select2.value === '') {
+        alert('문의사항을 선택해 주세요.');
+        $select2.focus();
+    } else if ($chkbox.checked === false) {
+        alert('개인정보 이용에 동의해주세요.');
+        $chkbox.focus();
+        return false;
+    } else {
+        alert('제출이 완료되었습니다.');
+        window.location.replace('./inquiry.html');
+    }
+};
+// inquiry.html - 제출버튼
+const inquirySubmit = () => {
+    const $btn = get('.inquiry .inquirys .btn button');
+    $btn.addEventListener('click', (e) => {
+        inquiryCheck();
+    });
+};
+// inquiry.html - 하단 협력사 배너 무한 롤링
+const rolling = () => {
+    const $rollingBanner = get('.inquiry .rollingBanner');
+    const $logos = get('.inquiry .rollingBanner .logos');
+    const $logosUl = get('.inquiry .rollingBanner .logos ul');
+    let clone = $logos.cloneNode(true);
+    $rollingBanner.appendChild(clone);
+    $logos.style.left = '0px';
+    clone.style.left = $logosUl;
+    $logos.classList.add('original');
+    clone.classList.add('clone');
+};
+// 국제전화코드 플러그인(공통)
+const tel = () => {
+    var input = document.querySelector('#phone');
 
+    var iti = window.intlTelInput(input, {
+        nationalMode: false,
+        utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/utils.js',
+        initialCountry: 'kr',
+    });
+    input.addEventListener('change', function () {
+        var selectedCountryData = iti.getSelectedCountryData();
+    });
+};
+/* --------------------------------------------------------------------
+create bt kang-young-hyun
+at 2024-04-25 / price (백그라운드  & 가격정보 애니메이션)
+--------------------------------------------------------------------*/
+const rollingTxt = () => {
+    const $bgTxt = get('.price .bg-txt h3');
+    const eleWidth = $bgTxt.scrollWidth;
+    let cnt = 0;
+    const moveCnt = (cnt, element, direction) => {
+        if (cnt > eleWidth / 2) {
+            element.style.transform = `translateX(0)`;
+            cnt = 0;
+        }
+        element.style.transform = `translateX(${cnt * direction}px)`;
+        return cnt;
+    };
+    const rollingAni = () => {
+        cnt = cnt + 1;
+        cnt = moveCnt(cnt, $bgTxt, -1);
+        window.requestAnimationFrame(rollingAni);
+    };
+    rollingAni();
+    window.addEventListener('scroll', (e) => {
+        cnt += 10;
+    });
+};
+const priceAni = () => {
+    const $priceLis = getAll('.price .pay-list ul li');
+
+    let observer = new IntersectionObserver((e) => {
+        e.forEach((lis) => {
+            if (lis.isIntersecting) {
+                setTimeout(() => {
+                    lis.target.style.opacity = 1;
+                    lis.target.style.transform = `translateY(0px)`;
+                }, 300);
+            } else {
+                // 화면에서 없어지면 투명도 0
+                setTimeout(() => {
+                    lis.target.style.opacity = 0;
+                    lis.target.style.transform = `translateY(50px)`;
+                }, 300);
+            }
+        });
+    });
+
+    // observe()컨텐츠가 뷰포트에 나타나는지 확인해줌
+    observer.observe($priceLis[0]);
+    observer.observe($priceLis[1]);
+    observer.observe($priceLis[2]);
+};
+/* ------------------------------------------------------------------------
+create by shin-jun-hyeok
+at 2024-04-24 /imgSlide ,loginForm
+------------------------------------------------------------------------ */
+// login.html - 이미지배너
+const imgSlide = () => {
+    const $slideImg = getAll('.login-page .img-slide .slide li');
+    const $paging = getAll('.login-page .img-slide .paging li');
+    let slideWidth = $slideImg[0].offsetWidth;
+    let cnt = 0,
+        old = 0,
+        length = $slideImg.length,
+        timer = null,
+        interval = 3000;
+
+    const slide = () => {
+        $slideImg[cnt].style.transition = '0s';
+        $slideImg[cnt].style.left = `${slideWidth}px`;
+        $slideImg[cnt].style.zIndex = '10';
+
+        setTimeout(() => {
+            $slideImg[cnt].style.transition = '0.4s';
+            $slideImg[cnt].style.left = '0px';
+            $paging[cnt].classList.add('active');
+            $slideImg[old].style.left = `${slideWidth * -1}px`;
+            $slideImg[old].style.zIndex = '1';
+            $paging[old].classList.remove('active');
+            old = cnt;
+        }, 50);
+    };
+    const time = () => {
+        cnt++;
+        if (cnt > length - 1) {
+            cnt = 0;
+        }
+        slide();
+    };
+    timer = setInterval(time, interval);
+    $paging.forEach((page, idx) => {
+        page.addEventListener('click', (e) => {
+            cnt = idx;
+            slide();
+            clearInterval(timer);
+            timer = setInterval(time, interval);
+        });
+    });
+};
+// login.html - 로그인 형식
+const loginForm = () => {
+    let $email = get('.login-page .login-form .login-input .email');
+    let $password = get('.login-page .login-form .login-input .password');
+    let $loginBtn = get('.login-page .login-form .btn-wrap .btn-login');
+    let $signupBtn = get('.login-page .login-form .btn-wrap .btn-signup');
+    let emailTxt = '';
+    let pwdTxt = '';
+    $loginBtn.addEventListener('click', (e) => {
+        emailTxt = $email.value;
+        pwdTxt = $password.value;
+
+        if (emailTxt.indexOf('@') === -1 || emailTxt.split('@')[1].indexOf('.') === -1) {
+            alert('이메일 형식이 올바르지않습니다.');
+            $email.focus();
+        } else if (pwdTxt === '') {
+            alert('비밀번호를 입력해주세요.');
+            $password.focus();
+        } else {
+            window.location.replace('./index.html');
+        }
+    });
+
+    $signupBtn.addEventListener('click', (e) => {
+        window.location.replace('./signup.html');
+    });
+};
+/* ------------------------------------------------------------------------
+create by shin-jun-hyeok
+at 2024-04-29 /signUpAgree, signUpSelect, signUpCheck, signUpSubmit
+------------------------------------------------------------------------ */
+// signup.html - 전체동의 체크
+const signUpAgree = () => {
+    const $personal = get('.signup form .agree .personalInfo');
+    const $use = get('.signup form .agree .termsOfUse');
+    const $chks = getAll('input[type=checkbox]');
+    const $chk = getAll('.signup form .agree .chkbox .chk');
+    let isChecked = true;
+
+    $personal.value = terms[0].desc;
+    $use.value = terms[1].desc;
+
+    $chks.forEach((check, idx) => {
+        check.addEventListener('change', (e) => {
+            isChecked = true;
+            if (check.name === 'all') {
+                $chks.forEach((chk1) => {
+                    chk1.checked = all.checked;
+                });
+            }
+            $chk.forEach((chk2) => {
+                isChecked = chk2.checked && isChecked;
+            });
+            all.checked = isChecked;
+        });
+    });
+};
+// signup.html - 셀렉트박스 옵션
+const signUpSelect = () => {
+    const $channel = get('.signup form .input p .channel');
+    const $solution = get('.signup form .input p .solution');
+    const $language = get('.signup form .input p .language');
+    channels.forEach((item, idx) => {
+        let option = document.createElement('option');
+        option.setAttribute('value', item.value);
+        option.innerHTML = item.name;
+        $channel.appendChild(option);
+    });
+    solutions.forEach((item, idx) => {
+        let option = document.createElement('option');
+        option.setAttribute('value', item.value);
+        option.innerHTML = item.name;
+        $solution.appendChild(option);
+    });
+    languages.forEach((item, idx) => {
+        let option = document.createElement('option');
+        option.setAttribute('value', item.value);
+        option.innerHTML = item.name;
+        $language.appendChild(option);
+    });
+};
+
+// signup.html - 유효성검사
+const signUpCheck = () => {
+    let $chk1 = get('.signup form .agree .chkbox #chk1');
+    let $chk2 = get('.signup form .agree .chkbox #chk2');
+    let $id = get('.signup form .input p #userName');
+    let $email = get('.signup form .input p #userEmail');
+    let $company = get('.signup form .input p #companyName');
+    let $sol = get('.signup form .input p #solution');
+    let $lan = get('.signup form .input p #language');
+
+    if ($chk1.checked === false) {
+        alert('개인정보 이용에 동의해주세요.');
+        $chk1.focus();
+        return false;
+    } else if ($chk2.checked === false) {
+        alert('이용약관에 동의해주세요.');
+        $chk2.focus();
+        return false;
+    } else if ($id.value === '') {
+        alert('사용자 성함을 입력해 주세요.');
+        $id.focus();
+    } else if ($email.value.indexOf('@') === -1 || $email.value.split('@')[1].indexOf('.') === -1) {
+        alert('이메일 형식이 올바르지 않습니다.');
+        $email.focus();
+    } else if ($company.value === '') {
+        alert('회사명을 입력해 주세요.');
+        $company.focus();
+    } else if ($sol.value === '') {
+        alert('관심 솔루션을 선택해 주세요.');
+        $sol.focus();
+    } else if ($lan.value === '') {
+        alert('언어를 선택해 주세요.');
+        $lan.focus();
+    } else {
+        alert('사용신청이 완료되었습니다.');
+        window.location.replace('./login.html');
+    }
+};
+// signup.html - 제출버튼
+const signUpSubmit = () => {
+    const $btn = get('.signup form .btn button');
+    $btn.addEventListener('click', (e) => {
+        signUpCheck();
+    });
+};
 //서브페이지 별 함수 호출
+const about = () => {
+    aboutFn();
+};
+const cargo = () => {
+    cargoBanner();
+    solCommon();
+};
+const port = () => {
+    solCommon();
+};
+const ship = () => {
+    solCommon();
+    shipBanner();
+};
+const iot = () => {
+    iotBanner();
+    iotScroll();
+    solCommon();
+};
 const blog = () => {
     blogList();
 };
@@ -563,15 +1376,58 @@ const eventFin = () => {
     eventListFin();
 };
 
+const price = () => {
+    rollingTxt();
+    priceAni();
+};
+
+const faq = () => {
+    faqPage();
+};
+const inquiry = () => {
+    inquirySelect();
+    inquiryAgree();
+    inquirySubmit();
+    rolling();
+    tel();
+};
 const guide = () => {
     guideList();
 };
+const login = () => {
+    imgSlide();
+    loginForm();
+};
+const signup = () => {
+    signUpAgree();
+    signUpSelect();
+    signUpSubmit();
+    tel();
+};
 
 const subInit = () => {
+    if (location.pathname.split('/').pop() === 'about.html') {
+        about();
+    }
+    if (location.pathname.split('/').pop() === 'cargo.html') {
+        cargo();
+    }
+    if (location.pathname.split('/').pop() === 'port.html') {
+        port();
+    }
+    if (location.pathname.split('/').pop() === 'ship.html') {
+        ship();
+    }
+    if (location.pathname.split('/').pop() === 'iot.html') {
+        iot();
+    }
+    if (location.pathname.split('/').pop() === 'news.html') {
+        fNewsPageInit();
+    }
     if (location.pathname.split('/').pop() === 'blog.html') {
         blog();
     }
-    if (location.pathname.split('/').pop() === 'baltimore.html' || location.pathname.split('/').pop() === 'ais.html' || location.pathname.split('/').pop() === 'cargo.html' || location.pathname.split('/').pop() === 'maersk.html' || location.pathname.split('/').pop() === 'red-sea.html') {
+    if (location.pathname.split('/').pop() === 'blogPost.html') {
         blogSub();
     }
     if (location.pathname.split('/').pop() === 'eventOn.html') {
@@ -580,8 +1436,27 @@ const subInit = () => {
     if (location.pathname.split('/').pop() === 'eventFin.html') {
         eventFin();
     }
+    if (location.pathname.split('/').pop() === 'recruit.html') {
+        fRecruitPageInit();
+        fRecruitDark();
+    }
+    if (location.pathname.split('/').pop() === 'price.html') {
+        price();
+    }
+    if (location.pathname.split('/').pop() === 'faq.html') {
+        faq();
+    }
+    if (location.pathname.split('/').pop() === 'inquiry.html') {
+        inquiry();
+    }
     if (location.pathname.split('/').pop() === 'guide.html') {
         guide();
+    }
+    if (location.pathname.split('/').pop() === 'login.html') {
+        login();
+    }
+    if (location.pathname.split('/').pop() === 'signup.html') {
+        signup();
     }
 };
 
